@@ -1,130 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather UI</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header text-center my-4">
+            <h1 class="text-white fw-bold"><i class="bi bi-cloud-sun-fill me-2"></i>Weather App</h1>
+            <p class="text-light">Get instant weather updates for any city</p>
+        </div>
 
-  <body>
-    <div
-      class="text-center d-flex gap-2"
-      style="width: 400px; margin: 20px auto"
-    >
-      <input
-        type="text"
-        id="searchField"
-        class="form-control"
-        value=""
-        placeholder="city name"
-      />
-      <button class="btn btn-warning btn-sm" id="searchBtn">Search</button>
+        <!-- Search Section -->
+        <div class="search-box p-4 rounded-3 mb-4">
+            <div class="row g-2 align-items-center">
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-end-0">
+                            <i class="bi bi-search text-white"></i>
+                        </span>
+                        <input type="text" id="searchField" class="form-control border-start-0" 
+                               placeholder="Search for a city..." autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-warning fw-bold" id="searchBtn">
+                            <i class="bi bi-search me-1"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Cities -->
+            <div class="mt-3 text-center">
+                <small class="text-light me-2">Try:</small>
+                <span class="city-tag" data-city="London">London</span>
+                <span class="city-tag" data-city="New York">New York</span>
+                <span class="city-tag" data-city="Tokyo">Tokyo</span>
+                <span class="city-tag" data-city="Delhi">Delhi</span>
+                <span class="city-tag" data-city="Paris">Paris</span>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorContainer" class="alert alert-danger d-none" role="alert">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <span id="errorMessage">City not found. Please try again.</span>
+        </div>
+
+        <!-- Main Weather Card -->
+        <div class="weather-card text-white p-4 rounded-4 shadow-lg mb-4">
+            <!-- Location & Date -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h2 id="cityName" class="fw-bold mb-1">--</h2>
+                    <p id="currentDate" class="text-light mb-0">--</p>
+                </div>
+                <button class="btn btn-outline-light btn-sm" id="locationBtn" title="Use my location">
+                    <i class="bi bi-geo-alt"></i>
+                </button>
+            </div>
+
+            <!-- Temperature & Weather -->
+            <div id="temperature" class="text-center py-4">
+                <div class="placeholder-content">
+                    <h5 class="text-light">Search for a city to see weather</h5>
+                </div>
+            </div>
+
+            <!-- Weather Details -->
+            <div class="weather-details mt-4" id="weatherDetails">
+                <div class="row text-center">
+                    <div class="col-4">
+                        <div class="detail-item">
+                            <i class="bi bi-thermometer-half"></i>
+                            <p class="mb-1">Feels Like</p>
+                            <h5 class="fw-bold">--°</h5>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="detail-item">
+                            <i class="bi bi-wind"></i>
+                            <p class="mb-1">Wind</p>
+                            <h5 class="fw-bold">-- km/h</h5>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="detail-item">
+                            <i class="bi bi-droplet-half"></i>
+                            <p class="mb-1">Humidity</p>
+                            <h5 class="fw-bold">--%</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="info-card p-3 rounded-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-sunrise text-warning me-2"></i>
+                        <h6 class="mb-0">Sunrise & Sunset</h6>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <p class="mb-1">Sunrise</p>
+                            <p class="fw-bold" id="sunrise">--:--</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-1">Sunset</p>
+                            <p class="fw-bold" id="sunset">--:--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="info-card p-3 rounded-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-eye text-info me-2"></i>
+                        <h6 class="mb-0">Visibility & Pressure</h6>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <p class="mb-1">Visibility</p>
+                            <p class="fw-bold" id="visibility">-- km</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-1">Pressure</p>
+                            <p class="fw-bold" id="pressure">-- hPa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer text-center mt-4 pt-3">
+            <p class="text-light small">
+                Powered by <a href="https://openweathermap.org" target="_blank" class="text-warning">OpenWeather</a>
+                • <span id="lastUpdate">Last updated: --</span>
+            </p>
+        </div>
     </div>
-    <div class="weather-card text-white mx-auto p-4">
-      <div
-        class="d-flex justify-content-between align-items-center"
-        id="temperature"
-      ></div>
 
-      <div class="weather-info mt-4" id="feelsLike"></div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.js"></script>
-    <script>
-      function formatDate() {
-        const today = new Date();
-
-        // Array of weekday names
-        const daysOfWeek = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ];
-
-        // Array of month names
-        const months = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
-
-        // Get day name, date, and month
-        const dayName = daysOfWeek[today.getDay()]; // Get current day name
-        const dayNumber = today.getDate(); // Get current date (number)
-        const monthName = months[today.getMonth()]; // Get current month name
-
-        // Format as "Monday, 20 May"
-        return `${dayName}, ${dayNumber} ${monthName}`;
-      }
-
-      let btn = document.getElementById("searchBtn");
-      let input = document.getElementById("searchField");
-      let tempDiv = document.getElementById("temperature");
-      let feelsDiv = document.getElementById("feelsLike");
-
-      btn.addEventListener("click", function () {
-        let city = input.value;
-        tempDiv.innerHTML = `<div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>`;
-        // fetch
-        fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6a382ec6cb5712ccdb0b26e67db1698c&units=metric`
-        )
-          .then(function (res) {
-            return res.json();
-          })
-          .then(function (data) {
-            tempDiv.innerHTML = ` <div>
-                           <h5>${formatDate()}</h5>
-                            <div class='d-flex gap-4 align-items-center'>
-                              <img src="https://openweathermap.org/img/wn/${
-                                data.weather[0].icon
-                              }.png" />
-                                <h1>${Math.ceil(data.main.temp)}°</h1>
-                            </div>
-                                 <p>${data.weather[0].description}</p>
-                                </div>
-                                <div>
-                                    <i class="bi bi-cloud-rain icon-size"></i>
-                                </div>`;
-
-            feelsDiv.innerHTML = `<div class="row text-center">
-                <div class="col">
-                    <i class="bi bi-wind"></i>
-                    <p>${Math.ceil(data.wind.speed * 1.6)} km/h</p>
-                </div>
-                <div class="col">
-                    <i class="bi bi-thermometer-half"></i>
-                    <p>Feels like ${Math.ceil(data.main.feels_like)}°</p>
-                </div>
-                <div class="col">
-                    <i class="bi bi-droplet-half"></i>
-                    <p>${Math.ceil(data.main.humidity)}% Humidity</p>
-                </div>
-            </div>`;
-          });
-      });
-    </script>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
