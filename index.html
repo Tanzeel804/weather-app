@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather UI</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div
+      class="text-center d-flex gap-2"
+      style="width: 400px; margin: 20px auto"
+    >
+      <input
+        type="text"
+        id="searchField"
+        class="form-control"
+        value=""
+        placeholder="city name"
+      />
+      <button class="btn btn-warning btn-sm" id="searchBtn">Search</button>
+    </div>
+    <div class="weather-card text-white mx-auto p-4">
+      <div
+        class="d-flex justify-content-between align-items-center"
+        id="temperature"
+      ></div>
+
+      <div class="weather-info mt-4" id="feelsLike"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.js"></script>
+    <script>
+      function formatDate() {
+        const today = new Date();
+
+        // Array of weekday names
+        const daysOfWeek = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+
+        // Array of month names
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+
+        // Get day name, date, and month
+        const dayName = daysOfWeek[today.getDay()]; // Get current day name
+        const dayNumber = today.getDate(); // Get current date (number)
+        const monthName = months[today.getMonth()]; // Get current month name
+
+        // Format as "Monday, 20 May"
+        return `${dayName}, ${dayNumber} ${monthName}`;
+      }
+
+      let btn = document.getElementById("searchBtn");
+      let input = document.getElementById("searchField");
+      let tempDiv = document.getElementById("temperature");
+      let feelsDiv = document.getElementById("feelsLike");
+
+      btn.addEventListener("click", function () {
+        let city = input.value;
+        tempDiv.innerHTML = `<div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>`;
+        // fetch
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6a382ec6cb5712ccdb0b26e67db1698c&units=metric`
+        )
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (data) {
+            tempDiv.innerHTML = ` <div>
+                           <h5>${formatDate()}</h5>
+                            <div class='d-flex gap-4 align-items-center'>
+                              <img src="https://openweathermap.org/img/wn/${
+                                data.weather[0].icon
+                              }.png" />
+                                <h1>${Math.ceil(data.main.temp)}°</h1>
+                            </div>
+                                 <p>${data.weather[0].description}</p>
+                                </div>
+                                <div>
+                                    <i class="bi bi-cloud-rain icon-size"></i>
+                                </div>`;
+
+            feelsDiv.innerHTML = `<div class="row text-center">
+                <div class="col">
+                    <i class="bi bi-wind"></i>
+                    <p>${Math.ceil(data.wind.speed * 1.6)} km/h</p>
+                </div>
+                <div class="col">
+                    <i class="bi bi-thermometer-half"></i>
+                    <p>Feels like ${Math.ceil(data.main.feels_like)}°</p>
+                </div>
+                <div class="col">
+                    <i class="bi bi-droplet-half"></i>
+                    <p>${Math.ceil(data.main.humidity)}% Humidity</p>
+                </div>
+            </div>`;
+          });
+      });
+    </script>
+  </body>
+</html>
