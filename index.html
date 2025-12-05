@@ -1,772 +1,304 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Pro | Advanced Weather Forecasting Platform</title>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Pro | Real-Time Weather Forecasting</title>
+    
     <!-- Bootstrap 5 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-    />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Weather Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css" />
-
+    <link rel="stylesheet" href="style.css">
+    
     <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>"
-    />
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#1a1a2e" />
-    <meta
-      name="description"
-      content="Professional weather forecasting application with real-time updates, detailed forecasts, and interactive maps."
-    />
-  </head>
-  <body>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>">
+</head>
+<body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <i class="bi bi-cloud-sun-fill me-2"></i>
-          <span class="brand-text"
-            >Weather<span class="text-warning">Pro</span></span
-          >
-        </a>
-
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="#home">
-                <i class="bi bi-house-door me-1"></i>Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#forecast">
-                <i class="bi bi-calendar3 me-1"></i>Forecast
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#maps">
-                <i class="bi bi-map me-1"></i>Maps
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#alerts">
-                <i class="bi bi-bell me-1"></i>Alerts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#settings">
-                <i class="bi bi-gear me-1"></i>Settings
-              </a>
-            </li>
-          </ul>
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-cloud-sun-fill me-2"></i>
+                <span class="brand-text">Weather<span class="text-warning">Pro</span></span>
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <!-- Theme Toggle -->
+                <div class="theme-toggle me-3">
+                    <button id="themeToggle" class="btn btn-sm btn-outline-light">
+                        <i class="bi bi-sun-fill d-none"></i>
+                        <i class="bi bi-moon-fill"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Time -->
+                <div class="current-time text-light small d-none d-md-block">
+                    <i class="bi bi-clock me-1"></i>
+                    <span id="currentTime">00:00</span>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- Main Container -->
-    <main class="container-fluid p-0">
-      <!-- Hero Section -->
-      <section id="home" class="hero-section py-5 mt-5">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-6">
-              <div class="hero-content">
-                <h1 class="display-4 fw-bold mb-3">
-                  Real-Time Weather
-                  <span class="text-gradient">Intelligence</span>
-                </h1>
-                <p class="lead mb-4">
-                  Get accurate weather forecasts, severe weather alerts, and
-                  detailed meteorological data for any location worldwide.
-                </p>
-
-                <!-- Search Section -->
-                <div class="search-container mb-4">
-                  <div class="input-group input-group-lg shadow-lg">
-                    <span class="input-group-text bg-dark border-dark">
-                      <i class="bi bi-geo-alt text-warning"></i>
-                    </span>
-                    <input
-                      type="text"
-                      id="searchField"
-                      class="form-control form-control-lg"
-                      placeholder="Enter city, zip code, or coordinates..."
-                      autocomplete="off"
-                      aria-label="Search location"
-                    />
-                    <button
-                      class="btn btn-warning btn-lg px-4"
-                      type="button"
-                      id="searchBtn"
-                    >
-                      <i class="bi bi-search me-2"></i>Search
-                    </button>
-                    <button
-                      class="btn btn-outline-light btn-lg"
-                      type="button"
-                      id="locationBtn"
-                      title="Use my location"
-                    >
-                      <i class="bi bi-crosshair"></i>
-                    </button>
-                  </div>
-
-                  <!-- Popular Cities -->
-                  <div class="popular-cities mt-3">
-                    <small class="text-light me-2">Popular Cities:</small>
-                    <div class="btn-group" role="group">
-                      <button
-                        type="button"
-                        class="btn btn-outline-light btn-sm"
-                        data-city="New Delhi"
-                      >
-                        <i class="bi bi-building"></i> New Delhi
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-light btn-sm"
-                        data-city="Mumbai"
-                      >
-                        <i class="bi bi-building"></i> Mumbai
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-light btn-sm"
-                        data-city="Bangalore"
-                      >
-                        <i class="bi bi-building"></i> Bangalore
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-light btn-sm"
-                        data-city="London"
-                      >
-                        <i class="bi bi-globe-europe-africa"></i> London
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-light btn-sm"
-                        data-city="New York"
-                      >
-                        <i class="bi bi-globe-americas"></i> New York
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="hero-weather-card text-center">
-                <div class="current-weather-display" id="currentWeather">
-                  <!-- Current weather will be loaded here -->
-                  <div class="placeholder-weather">
-                    <i class="wi wi-day-sunny weather-icon-large"></i>
-                    <h3 class="mt-3">Search for a location</h3>
-                    <p class="text-light">Enter a city name to get started</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Loading Spinner -->
-      <div id="loadingSpinner" class="loading-container d-none">
-        <div
-          class="spinner-border text-warning"
-          role="status"
-          style="width: 4rem; height: 4rem"
-        >
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        <p class="mt-3 text-light">Fetching weather data...</p>
-      </div>
-
-      <!-- Error Message -->
-      <div
-        id="errorContainer"
-        class="alert alert-danger alert-dismissible fade show d-none"
-        role="alert"
-      >
-        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-        <span id="errorMessage"></span>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-
-      <!-- Current Weather Details -->
-      <section class="weather-details-section py-5">
-        <div class="container">
-          <div class="section-header mb-4">
-            <h2 class="section-title">
-              <i class="bi bi-speedometer2 me-2"></i>Current Conditions
-            </h2>
-            <div class="header-actions">
-              <div class="btn-group" role="group">
-                <button
-                  type="button"
-                  class="btn btn-outline-light active"
-                  data-unit="metric"
-                >
-                  °C
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-light"
-                  data-unit="imperial"
-                >
-                  °F
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="row g-4">
-            <!-- Temperature Card -->
-            <div class="col-md-4">
-              <div class="weather-card">
-                <div class="card-header">
-                  <i class="bi bi-thermometer-half"></i>
-                  <h5>Temperature</h5>
-                </div>
-                <div class="card-body">
-                  <div class="temp-main" id="currentTemp">
-                    <span class="temp-value">--</span>
-                    <span class="temp-unit">°C</span>
-                  </div>
-                  <div class="temp-details">
-                    <div class="temp-item">
-                      <span class="label">Feels Like</span>
-                      <span class="value" id="feelsLikeTemp">--°</span>
-                    </div>
-                    <div class="temp-item">
-                      <span class="label">Min / Max</span>
-                      <span class="value" id="tempRange">--° / --°</span>
-                    </div>
-                    <div class="temp-item">
-                      <span class="label">Dew Point</span>
-                      <span class="value" id="dewPoint">--°</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Wind & Pressure Card -->
-            <div class="col-md-4">
-              <div class="weather-card">
-                <div class="card-header">
-                  <i class="bi bi-wind"></i>
-                  <h5>Wind & Pressure</h5>
-                </div>
-                <div class="card-body">
-                  <div class="wind-main">
-                    <div class="wind-speed">
-                      <i
-                        class="bi bi-arrow-up-right-circle wind-direction"
-                        id="windDirectionIcon"
-                      ></i>
-                      <span class="speed-value" id="windSpeed">--</span>
-                      <span class="speed-unit">km/h</span>
-                    </div>
-                    <div class="wind-details">
-                      <div class="wind-item">
-                        <span class="label">Direction</span>
-                        <span class="value" id="windDirection">--°</span>
-                      </div>
-                      <div class="wind-item">
-                        <span class="label">Gusts</span>
-                        <span class="value" id="windGust">-- km/h</span>
-                      </div>
-                      <div class="wind-item">
-                        <span class="label">Pressure</span>
-                        <span class="value" id="pressureValue">-- hPa</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Humidity & Visibility Card -->
-            <div class="col-md-4">
-              <div class="weather-card">
-                <div class="card-header">
-                  <i class="bi bi-droplet-half"></i>
-                  <h5>Humidity & Visibility</h5>
-                </div>
-                <div class="card-body">
-                  <div class="humidity-main">
-                    <div class="humidity-value">
-                      <span class="percentage" id="humidityValue">--</span>
-                      <span class="percentage-unit">%</span>
-                    </div>
-                    <div class="humidity-details">
-                      <div class="humidity-item">
-                        <span class="label">Visibility</span>
-                        <span class="value" id="visibilityValue">-- km</span>
-                      </div>
-                      <div class="humidity-item">
-                        <span class="label">Cloud Cover</span>
-                        <span class="value" id="cloudCover">--%</span>
-                      </div>
-                      <div class="humidity-item">
-                        <span class="label">UV Index</span>
-                        <span class="value uv-index" id="uvIndex">--</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Sunrise & Sunset Card -->
-            <div class="col-md-6">
-              <div class="weather-card">
-                <div class="card-header">
-                  <i class="bi bi-sun"></i>
-                  <h5>Sun & Moon</h5>
-                </div>
-                <div class="card-body">
-                  <div class="sun-moon-grid">
-                    <div class="sun-item">
-                      <div class="sun-icon sunrise">
-                        <i class="bi bi-sunrise"></i>
-                      </div>
-                      <div class="sun-details">
-                        <span class="label">Sunrise</span>
-                        <span class="value" id="sunriseTime">--:--</span>
-                      </div>
-                    </div>
-                    <div class="sun-item">
-                      <div class="sun-icon sunset">
-                        <i class="bi bi-sunset"></i>
-                      </div>
-                      <div class="sun-details">
-                        <span class="label">Sunset</span>
-                        <span class="value" id="sunsetTime">--:--</span>
-                      </div>
-                    </div>
-                    <div class="sun-item">
-                      <div class="sun-icon day-length">
-                        <i class="bi bi-clock"></i>
-                      </div>
-                      <div class="sun-details">
-                        <span class="label">Day Length</span>
-                        <span class="value" id="dayLength">--h --m</span>
-                      </div>
-                    </div>
-                    <div class="sun-item">
-                      <div class="sun-icon moon-phase">
-                        <i class="bi bi-moon-stars"></i>
-                      </div>
-                      <div class="sun-details">
-                        <span class="label">Moon Phase</span>
-                        <span class="value" id="moonPhase">--</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Air Quality Card -->
-            <div class="col-md-6">
-              <div class="weather-card">
-                <div class="card-header">
-                  <i class="bi bi-cloud-fog"></i>
-                  <h5>Air Quality Index</h5>
-                </div>
-                <div class="card-body">
-                  <div class="air-quality">
-                    <div class="aqi-display">
-                      <div class="aqi-value" id="aqiValue">--</div>
-                      <div class="aqi-label" id="aqiLabel">Loading...</div>
-                    </div>
-                    <div class="aqi-breakdown">
-                      <div class="pollutant">
-                        <span class="pollutant-name">PM2.5</span>
-                        <div class="pollutant-bar">
-                          <div class="pollutant-level" style="width: 0%"></div>
+    <div class="container mt-5 pt-4">
+        
+        <!-- Search Section -->
+        <div class="search-section mb-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="search-card p-4 rounded-4">
+                        <h4 class="text-center mb-4">Find Your City Weather</h4>
+                        
+                        <div class="input-group input-group-lg mb-3">
+                            <input type="text" id="searchField" class="form-control" 
+                                   placeholder="Enter city name (e.g., London, New York, Tokyo)" 
+                                   autocomplete="off">
+                            <button class="btn btn-warning" type="button" id="searchBtn">
+                                <i class="bi bi-search me-1"></i> Search
+                            </button>
+                            <button class="btn btn-outline-light" type="button" id="locationBtn" title="Use my location">
+                                <i class="bi bi-geo-alt"></i>
+                            </button>
                         </div>
-                        <span class="pollutant-value">--</span>
-                      </div>
-                      <div class="pollutant">
-                        <span class="pollutant-name">PM10</span>
-                        <div class="pollutant-bar">
-                          <div class="pollutant-level" style="width: 0%"></div>
+                        
+                        <!-- Quick Cities -->
+                        <div class="quick-cities text-center">
+                            <small class="text-light opacity-75 me-2">Quick Cities:</small>
+                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="London">
+                                <i class="bi bi-building"></i> London
+                            </button>
+                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="New York">
+                                <i class="bi bi-building"></i> New York
+                            </button>
+                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="Tokyo">
+                                <i class="bi bi-building"></i> Tokyo
+                            </button>
+                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="Delhi">
+                                <i class="bi bi-building"></i> Delhi
+                            </button>
+                            <button class="btn btn-sm btn-outline-light mb-2" data-city="Paris">
+                                <i class="bi bi-building"></i> Paris
+                            </button>
                         </div>
-                        <span class="pollutant-value">--</span>
-                      </div>
-                      <div class="pollutant">
-                        <span class="pollutant-name">O₃</span>
-                        <div class="pollutant-bar">
-                          <div class="pollutant-level" style="width: 0%"></div>
-                        </div>
-                        <span class="pollutant-value">--</span>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
 
-      <!-- Hourly Forecast -->
-      <section id="forecast" class="hourly-forecast-section py-5">
-        <div class="container">
-          <div class="section-header mb-4">
-            <h2 class="section-title">
-              <i class="bi bi-clock-history me-2"></i>24-Hour Forecast
-            </h2>
-            <div class="time-range">
-              <span class="text-light">Updated every 3 hours</span>
-            </div>
-          </div>
-
-          <div class="hourly-forecast-container">
-            <div class="hourly-scroll" id="hourlyForecast">
-              <!-- Hourly forecast items will be loaded here -->
-              <div class="hour-item placeholder">
-                <div class="hour-time">--:--</div>
-                <div class="hour-icon"><i class="wi wi-day-sunny"></i></div>
-                <div class="hour-temp">--°</div>
-              </div>
-            </div>
-          </div>
+        <!-- Error Message -->
+        <div id="errorContainer" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span id="errorMessage"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-      </section>
 
-      <!-- 7-Day Forecast -->
-      <section class="weekly-forecast-section py-5">
-        <div class="container">
-          <div class="section-header mb-4">
-            <h2 class="section-title">
-              <i class="bi bi-calendar3 me-2"></i>7-Day Forecast
-            </h2>
-          </div>
-
-          <div class="weekly-forecast" id="weeklyForecast">
-            <!-- Weekly forecast items will be loaded here -->
-            <div class="forecast-row placeholder">
-              <div class="forecast-day">Monday</div>
-              <div class="forecast-icon"><i class="wi wi-day-sunny"></i></div>
-              <div class="forecast-temp">
-                <span class="temp-max">--°</span>
-                <span class="temp-min">--°</span>
-              </div>
-              <div class="forecast-precip">
-                <i class="bi bi-droplet"></i> --%
-              </div>
-              <div class="forecast-wind">
-                <i class="bi bi-wind"></i> -- km/h
-              </div>
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="text-center d-none">
+            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-          </div>
+            <p class="text-light mt-3">Fetching weather data...</p>
         </div>
-      </section>
 
-      <!-- Weather Maps -->
-      <section id="maps" class="maps-section py-5">
-        <div class="container">
-          <div class="section-header mb-4">
-            <h2 class="section-title">
-              <i class="bi bi-map me-2"></i>Weather Maps
-            </h2>
-          </div>
-
-          <div class="row g-4">
-            <div class="col-md-6">
-              <div class="map-card">
-                <div class="map-header">
-                  <h5>Temperature Map</h5>
-                  <button class="btn btn-sm btn-outline-light">
-                    <i class="bi bi-fullscreen"></i>
-                  </button>
-                </div>
-                <div class="map-container">
-                  <div id="temperatureMap" class="map-placeholder">
-                    <div class="map-overlay">
-                      <i class="bi bi-thermometer-sun map-icon"></i>
-                      <p>Temperature visualization</p>
-                      <small>Interactive map will load here</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="map-card">
-                <div class="map-header">
-                  <h5>Precipitation Map</h5>
-                  <button class="btn btn-sm btn-outline-light">
-                    <i class="bi bi-fullscreen"></i>
-                  </button>
-                </div>
-                <div class="map-container">
-                  <div id="precipitationMap" class="map-placeholder">
-                    <div class="map-overlay">
-                      <i class="bi bi-cloud-rain map-icon"></i>
-                      <p>Precipitation radar</p>
-                      <small>Interactive map will load here</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Weather Alerts -->
-      <section id="alerts" class="alerts-section py-5">
-        <div class="container">
-          <div class="section-header mb-4">
-            <h2 class="section-title">
-              <i class="bi bi-bell me-2"></i>Weather Alerts
-            </h2>
-          </div>
-
-          <div class="alerts-container" id="weatherAlerts">
-            <!-- Weather alerts will be loaded here -->
-            <div class="alert-card info">
-              <div class="alert-icon">
-                <i class="bi bi-info-circle"></i>
-              </div>
-              <div class="alert-content">
-                <h6>No Active Alerts</h6>
-                <p>
-                  There are currently no severe weather alerts for your
-                  location.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Weather Statistics -->
-      <section class="stats-section py-5">
-        <div class="container">
-          <div class="section-header mb-4">
-            <h2 class="section-title">
-              <i class="bi bi-graph-up me-2"></i>Weather Statistics
-            </h2>
-            <div class="time-period">
-              <select class="form-select form-select-sm w-auto">
-                <option>Last 24 Hours</option>
-                <option>Last 7 Days</option>
-                <option>Last 30 Days</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row g-4">
-            <div class="col-md-3 col-6">
-              <div class="stat-card">
-                <div class="stat-icon temp-stat">
-                  <i class="bi bi-thermometer-high"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="avgTemp">--°</h3>
-                  <p>Average Temperature</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-6">
-              <div class="stat-card">
-                <div class="stat-icon rain-stat">
-                  <i class="bi bi-cloud-rain-heavy"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="totalRain">-- mm</h3>
-                  <p>Total Precipitation</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-6">
-              <div class="stat-card">
-                <div class="stat-icon wind-stat">
-                  <i class="bi bi-wind"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="avgWind">-- km/h</h3>
-                  <p>Average Wind Speed</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-6">
-              <div class="stat-card">
-                <div class="stat-icon sun-stat">
-                  <i class="bi bi-brightness-high"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="sunHours">-- h</h3>
-                  <p>Sunshine Hours</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="footer-section py-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 mb-4 mb-lg-0">
-              <div class="footer-brand">
-                <i class="bi bi-cloud-sun-fill footer-icon"></i>
-                <h3>Weather<span class="text-warning">Pro</span></h3>
-                <p class="footer-text">
-                  Advanced weather forecasting platform providing accurate
-                  meteorological data worldwide.
-                </p>
-              </div>
-              <div class="social-links mt-4">
-                <a href="#" class="social-link"
-                  ><i class="bi bi-twitter"></i
-                ></a>
-                <a href="#" class="social-link"
-                  ><i class="bi bi-facebook"></i
-                ></a>
-                <a href="#" class="social-link"
-                  ><i class="bi bi-instagram"></i
-                ></a>
-                <a href="#" class="social-link"><i class="bi bi-github"></i></a>
-              </div>
-            </div>
-
-            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
-              <h5 class="footer-heading">Features</h5>
-              <ul class="footer-links">
-                <li><a href="#home">Current Weather</a></li>
-                <li><a href="#forecast">Forecast</a></li>
-                <li><a href="#maps">Weather Maps</a></li>
-                <li><a href="#alerts">Alerts</a></li>
-                <li><a href="#settings">Settings</a></li>
-              </ul>
-            </div>
-
-            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
-              <h5 class="footer-heading">Resources</h5>
-              <ul class="footer-links">
-                <li><a href="#">API Documentation</a></li>
-                <li><a href="#">Weather Glossary</a></li>
-                <li><a href="#">Data Sources</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-              </ul>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="newsletter-card">
-                <h5 class="footer-heading">Stay Updated</h5>
-                <p class="footer-text">
-                  Subscribe to receive weather alerts and updates.
-                </p>
-                <div class="input-group mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Enter your email"
-                  />
-                  <button class="btn btn-warning" type="button">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer-bottom mt-5 pt-4 border-top border-secondary">
+        <!-- Current Weather Card -->
+        <div class="current-weather-card rounded-4 p-4 mb-4 shadow-lg">
             <div class="row align-items-center">
-              <div class="col-md-6">
-                <p class="mb-0">
-                  <i class="bi bi-lightning-charge-fill text-warning me-1"></i>
-                  Powered by
-                  <a
-                    href="https://openweathermap.org"
-                    target="_blank"
-                    class="text-warning"
-                    >OpenWeatherMap API</a
-                  >
-                </p>
-              </div>
-              <div class="col-md-6 text-md-end">
-                <p class="mb-0" id="footerTime">
-                  Last Updated: <span id="currentTime">--:--</span> |
-                  <span id="locationInfo">Location: --</span>
-                </p>
-              </div>
+                <!-- City & Date -->
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="location-info">
+                        <h2 id="cityName" class="fw-bold mb-1">Search a City</h2>
+                        <p id="currentDate" class="text-light opacity-75 mb-2">--</p>
+                        <p class="weather-status" id="weatherStatus">--</p>
+                    </div>
+                </div>
+                
+                <!-- Temperature & Icon -->
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="temp-display text-center">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <img id="weatherIcon" src="https://openweathermap.org/img/wn/01d@2x.png" 
+                                 alt="Weather" class="weather-icon me-3">
+                            <div>
+                                <h1 class="display-2 fw-bold mb-0" id="temperature">--°C</h1>
+                                <p class="text-light opacity-75 mb-0">Feels like <span id="feelsLike">--°C</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Info -->
+                <div class="col-md-4">
+                    <div class="additional-info">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <div class="info-item">
+                                    <i class="bi bi-wind"></i>
+                                    <div>
+                                        <small>Wind</small>
+                                        <p class="fw-bold mb-0" id="windSpeed">-- km/h</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="info-item">
+                                    <i class="bi bi-droplet-half"></i>
+                                    <div>
+                                        <small>Humidity</small>
+                                        <p class="fw-bold mb-0" id="humidity">--%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info-item">
+                                    <i class="bi bi-thermometer-half"></i>
+                                    <div>
+                                        <small>Pressure</small>
+                                        <p class="fw-bold mb-0" id="pressure">-- hPa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info-item">
+                                    <i class="bi bi-eye"></i>
+                                    <div>
+                                        <small>Visibility</small>
+                                        <p class="fw-bold mb-0" id="visibility">-- km</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </footer>
-    </main>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="btn btn-warning back-to-top">
-      <i class="bi bi-arrow-up"></i>
-    </button>
+        <!-- Weather Details Cards -->
+        <div class="row mb-4">
+            <!-- Sunrise/Sunset -->
+            <div class="col-md-6 mb-4">
+                <div class="detail-card rounded-3 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-sun text-warning me-3 fs-4"></i>
+                        <h5 class="mb-0">Sun & Moon</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="sun-item text-center p-3 rounded-3">
+                                <i class="bi bi-sunrise text-warning fs-3 mb-2"></i>
+                                <p class="mb-1">Sunrise</p>
+                                <h5 class="fw-bold" id="sunrise">--:--</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="sun-item text-center p-3 rounded-3">
+                                <i class="bi bi-sunset text-warning fs-3 mb-2"></i>
+                                <p class="mb-1">Sunset</p>
+                                <h5 class="fw-bold" id="sunset">--:--</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <p class="mb-1">Day Length: <span id="dayLength" class="fw-bold">--h --m</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Temperature Range -->
+            <div class="col-md-6 mb-4">
+                <div class="detail-card rounded-3 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-thermometer-half text-danger me-3 fs-4"></i>
+                        <h5 class="mb-0">Temperature Range</h5>
+                    </div>
+                    <div class="temp-range-chart">
+                        <div class="temp-labels d-flex justify-content-between mb-2">
+                            <small>Min</small>
+                            <small>Current</small>
+                            <small>Max</small>
+                        </div>
+                        <div class="temp-bar mb-3">
+                            <div class="temp-progress" id="tempProgress"></div>
+                        </div>
+                        <div class="temp-values d-flex justify-content-between">
+                            <h5 id="tempMin" class="text-info">--°C</h5>
+                            <h5 id="tempCurrent" class="fw-bold">--°C</h5>
+                            <h5 id="tempMax" class="text-danger">--°C</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Bootstrap JS Bundle -->
+        <!-- Hourly Forecast -->
+        <div class="hourly-forecast mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5><i class="bi bi-clock-history me-2"></i>24-Hour Forecast</h5>
+                <small class="text-light opacity-75">Every 3 hours</small>
+            </div>
+            <div class="hourly-scroll-container">
+                <div class="hourly-scroll" id="hourlyForecast">
+                    <!-- Hourly items will be added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 5-Day Forecast -->
+        <div class="forecast-card rounded-4 p-4 mb-5">
+            <h5 class="mb-4"><i class="bi bi-calendar3 me-2"></i>5-Day Forecast</h5>
+            <div id="forecastDays">
+                <!-- Forecast days will be added here -->
+            </div>
+        </div>
+
+        <!-- Developer Info -->
+        <div class="developer-card rounded-4 p-4 mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h5>About This App</h5>
+                    <p class="mb-2">Weather Pro is a professional weather forecasting application built with modern web technologies. It provides real-time weather data, forecasts, and detailed meteorological information.</p>
+                    <small class="text-light opacity-75">Built with ❤️ by Tanzeel Ahmed</small>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="developer-links">
+                        <a href="https://github.com/Tanzeel804" target="_blank" class="btn btn-outline-light me-2 mb-2">
+                            <i class="bi bi-github me-1"></i> GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/" target="_blank" class="btn btn-outline-light mb-2">
+                            <i class="bi bi-linkedin me-1"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-4">
+            <div class="footer-content">
+                <p class="text-light opacity-75 mb-2">
+                    Powered by <a href="https://openweathermap.org" target="_blank" class="text-warning">OpenWeatherMap</a>
+                    • Data updates every 10 minutes
+                </p>
+                <p class="text-light opacity-75 small">
+                    © 2024 Weather Pro. All rights reserved. 
+                    <span class="mx-2">•</span>
+                    Made with <i class="bi bi-heart-fill text-danger"></i> by Tanzeel Ahmed
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JavaScript -->
+    
+    <!-- Custom JS -->
     <script src="script.js"></script>
-
-    <!-- PWA Service Worker Registration -->
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("sw.js").catch(console.error);
-      }
-    </script>
-  </body>
+</body>
 </html>
