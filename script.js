@@ -62,6 +62,7 @@ function initApp() {
   // Set theme
   document.documentElement.setAttribute("data-theme", state.theme);
   updateThemeButton();
+  updateThemeStyles();
 
   // Load default city
   loadWeather(state.currentCity);
@@ -72,6 +73,12 @@ function initApp() {
   // Update time
   updateTime();
   setInterval(updateTime, 1000);
+
+  // Initialize alerts
+  initializeAlerts();
+
+  // Smooth scroll for nav links
+  setupSmoothScroll();
 }
 
 // Setup all event listeners
@@ -134,8 +141,14 @@ async function loadWeather(city) {
     updateCurrentWeather(currentData);
     updateForecast(forecastData);
 
+    // Update alerts based on weather
+    updateAlerts(currentData);
+
     // Save to localStorage
     localStorage.setItem("lastCity", city);
+
+    // Update page title
+    document.title = `${currentData.name} Weather | Weather Pro`;
   } catch (error) {
     console.error("Error loading weather:", error);
     showError(
@@ -395,6 +408,7 @@ function toggleTheme() {
   document.documentElement.setAttribute("data-theme", state.theme);
   localStorage.setItem("theme", state.theme);
   updateThemeButton();
+  updateThemeStyles();
 }
 
 // Update theme button icon
@@ -405,10 +419,23 @@ function updateThemeButton() {
   if (state.theme === "dark") {
     sunIcon.classList.add("d-none");
     moonIcon.classList.remove("d-none");
+    elements.themeToggle.title = "Switch to Light Mode";
   } else {
     sunIcon.classList.remove("d-none");
     moonIcon.classList.add("d-none");
+    elements.themeToggle.title = "Switch to Dark Mode";
   }
+}
+
+// Update theme-specific styles
+function updateThemeStyles() {
+  // Update navbar active state colors
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach((link) => {
+    if (link.classList.contains("active")) {
+      link.style.color = "var(--accent-color)";
+    }
+  });
 }
 
 // Update time
@@ -459,6 +486,120 @@ function updateWeatherBackground(weatherCondition) {
       body.classList.add("weather-bg-mist");
       break;
   }
+}
+
+// Initialize alerts
+function initializeAlerts() {
+  const alertsContainer = document.getElementById("weatherAlerts");
+  if (alertsContainer) {
+    alertsContainer.innerHTML = `
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <div>
+                    <strong>No active alerts</strong>
+                    <p class="mb-0">There are currently no severe weather alerts for your location.</p>
+                </div>
+            </div>
+        `;
+  }
+}
+
+// Update alerts based on weather
+function updateAlerts(weatherData) {
+  const alertsContainer = document.getElementById("weatherAlerts");
+  if (!alertsContainer) return;
+
+  const alerts = [];
+  const condition = weatherData.weather[0].main;
+  const windSpeed = weatherData.wind.speed;
+  const temp = weatherData.main.temp;
+
+  // Check for severe weather conditions
+  if (condition === "Thunderstorm") {
+    alerts.push({
+      type: "danger",
+      icon: "bi-lightning-fill",
+      title: "Thunderstorm Warning",
+      message:
+        "Thunderstorm detected. Stay indoors and avoid using electrical appliances.",
+    });
+  }
+
+  if (windSpeed > 15) {
+    alerts.push({
+      type: "warning",
+      icon: "bi-wind",
+      title: "High Wind Warning",
+      message:
+        "Strong winds detected. Secure loose objects and be cautious outdoors.",
+    });
+  }
+
+  if (temp > 35) {
+    alerts.push({
+      type: "warning",
+      icon: "bi-thermometer-sun",
+      title: "Heat Warning",
+      message:
+        "Extreme heat detected. Stay hydrated and avoid prolonged sun exposure.",
+    });
+  }
+
+  if (temp < 0) {
+    alerts.push({
+      type: "info",
+      icon: "bi-snow",
+      title: "Freezing Temperature",
+      message:
+        "Freezing temperatures detected. Dress warmly and watch for ice on roads.",
+    });
+  }
+
+  // Update alerts container
+  if (alerts.length > 0) {
+    alertsContainer.innerHTML = alerts
+      .map(
+        (alert) => `
+            <div class="alert alert-${alert.type} d-flex align-items-center mb-3" role="alert">
+                <i class="${alert.icon} me-2"></i>
+                <div>
+                    <strong>${alert.title}</strong>
+                    <p class="mb-0">${alert.message}</p>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+  } else {
+    alertsContainer.innerHTML = `
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <div>
+                    <strong>All Clear</strong>
+                    <p class="mb-0">No severe weather alerts for ${weatherData.name}.</p>
+                </div>
+            </div>
+        `;
+  }
+}
+
+// Setup smooth scroll for nav links
+function setupSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
 }
 
 // Format date
@@ -524,12 +665,3 @@ window.addEventListener("online", () => {
     loadWeather(state.currentCity);
   }
 });
-
-// Export for testing if needed
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = {
-    loadWeather,
-    getCurrentLocation,
-    toggleTheme,
-  };
-}
