@@ -35,120 +35,6 @@
       type="image/x-icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>"
     />
-    <style>
-      /* Profile Picture Styles */
-      .profile-picture {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid var(--accent-color);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .profile-picture:hover {
-        transform: scale(1.05) rotate(5deg);
-        border-color: var(--warning);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      }
-
-      /* Bio and Skills Cards */
-      .bio-card,
-      .skills-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .bio-card:hover,
-      .skills-card:hover {
-        border-color: var(--accent-color);
-        transform: translateY(-5px);
-      }
-
-      /* Updated Skills Grid */
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 1.5rem;
-        margin-top: 1rem;
-      }
-
-      .skill-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1.5rem 1rem;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-        cursor: pointer;
-        text-align: center;
-      }
-
-      .skill-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-8px) scale(1.05);
-        border-color: var(--accent-color);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .skill-item i {
-        margin-bottom: 0.5rem;
-        transition: all 0.3s ease;
-      }
-
-      .skill-item:hover i {
-        transform: scale(1.2);
-      }
-
-      .skill-name {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-        margin-top: 0.5rem;
-      }
-
-      /* Contact Items as Links */
-      .contact-item {
-        display: flex;
-        align-items: center;
-        padding: 0.75rem;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        border-left: 4px solid var(--accent-color);
-        transition: all 0.3s ease;
-        margin-bottom: 0.75rem;
-        text-decoration: none !important;
-      }
-
-      .contact-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateX(10px);
-        border-left-color: var(--warning);
-      }
-
-      .contact-item i:first-child {
-        font-size: 1.2rem;
-        margin-right: 1rem;
-        width: 24px;
-        text-align: center;
-      }
-
-      .contact-item i:last-child {
-        margin-left: auto;
-        opacity: 0.5;
-        transition: all 0.3s ease;
-      }
-
-      .contact-item:hover i:last-child {
-        opacity: 1;
-        transform: translateX(5px);
-      }
-    </style>
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -615,8 +501,8 @@
           <!-- Alerts will be added here -->
         </div>
       </div>
-
       <!-- Developer Section -->
+
       <div
         class="developer-section mb-5"
         id="developer"
@@ -635,33 +521,135 @@
             >
               <div class="profile-header mb-4">
                 <div class="d-flex align-items-center">
-                  <div class="developer-avatar me-3">
-                    <!-- یہاں آپکی تصویر لگے گی -->
+                  <div class="developer-avatar me-3" style="position: relative">
+                    <!-- تصویر سائز میں -->
                     <img
                       src="./WhatsApp Image 2025-11-15 at 4.20.26 PM.jpeg"
                       alt="Tanzeel Ahmed"
-                      class="profile-picture"
-                      onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Tanzeel+Ahmed&background=random&color=fff&size=150';"
+                      style="
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 3px solid #ff6b35;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                        transition: all 0.3s ease;
+                      "
+                      onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Tanzeel+Ahmed&background=ff6b35&color=fff&size=100';"
+                      onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#f59e0b'"
+                      onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ff6b35'"
                     />
+                    <span
+                      style="
+                        position: absolute;
+                        bottom: -5px;
+                        right: -5px;
+                        background: #ff6b35;
+                        color: white;
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                        font-size: 0.7rem;
+                        font-weight: 600;
+                      "
+                    >
+                      <i class="bi bi-star-fill me-1"></i>Dev
+                    </span>
                   </div>
                   <div>
-                    <h3 class="fw-bold mb-1">Tanzeel Ahmed</h3>
-                    <p class="text-light opacity-75 mb-2">
+                    <h3 class="fw-bold mb-1" style="color: var(--text-primary)">
+                      Tanzeel Ahmed
+                    </h3>
+                    <p
+                      class="mb-2"
+                      style="color: var(--text-secondary); font-size: 0.95rem"
+                    >
                       <i class="bi bi-award-fill text-warning me-1"></i> Full
                       Stack Developer & Weather Enthusiast
                     </p>
                     <div class="developer-tags">
-                      <span class="tag">
-                        <i class="bi bi-code-slash me-1"></i> Web Development
+                      <span
+                        class="tag"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          background: rgba(59, 130, 246, 0.1);
+                          color: #3b82f6;
+                          padding: 4px 10px;
+                          border-radius: 16px;
+                          font-size: 0.8rem;
+                          margin: 2px;
+                          border: 1px solid rgba(59, 130, 246, 0.3);
+                          transition: all 0.3s ease;
+                        "
+                      >
+                        <i
+                          class="bi bi-code-slash me-1"
+                          style="font-size: 0.8rem"
+                        ></i>
+                        Web Dev
                       </span>
-                      <span class="tag">
-                        <i class="bi bi-palette me-1"></i> UI/UX Design
+                      <span
+                        class="tag"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          background: rgba(139, 92, 246, 0.1);
+                          color: #8b5cf6;
+                          padding: 4px 10px;
+                          border-radius: 16px;
+                          font-size: 0.8rem;
+                          margin: 2px;
+                          border: 1px solid rgba(139, 92, 246, 0.3);
+                          transition: all 0.3s ease;
+                        "
+                      >
+                        <i
+                          class="bi bi-palette me-1"
+                          style="font-size: 0.8rem"
+                        ></i>
+                        UI/UX
                       </span>
-                      <span class="tag">
-                        <i class="bi bi-cloud-sun me-1"></i> Weather APIs
+                      <span
+                        class="tag"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          background: rgba(14, 165, 233, 0.1);
+                          color: #06b6d4;
+                          padding: 4px 10px;
+                          border-radius: 16px;
+                          font-size: 0.8rem;
+                          margin: 2px;
+                          border: 1px solid rgba(14, 165, 233, 0.3);
+                          transition: all 0.3s ease;
+                        "
+                      >
+                        <i
+                          class="bi bi-cloud-sun me-1"
+                          style="font-size: 0.8rem"
+                        ></i>
+                        APIs
                       </span>
-                      <span class="tag">
-                        <i class="bi bi-filetype-js me-1"></i> JavaScript Expert
+                      <span
+                        class="tag"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          background: rgba(245, 158, 11, 0.1);
+                          color: #f59e0b;
+                          padding: 4px 10px;
+                          border-radius: 16px;
+                          font-size: 0.8rem;
+                          margin: 2px;
+                          border: 1px solid rgba(245, 158, 11, 0.3);
+                          transition: all 0.3s ease;
+                        "
+                      >
+                        <i
+                          class="bi bi-filetype-js me-1"
+                          style="font-size: 0.8rem"
+                        ></i>
+                        JS
                       </span>
                     </div>
                   </div>
@@ -669,20 +657,46 @@
               </div>
 
               <div class="profile-bio mb-4">
-                <div class="bio-card p-4 rounded-3">
-                  <h6 class="fw-bold mb-3">
-                    <i class="bi bi-person-badge me-2"></i>About Me
+                <div
+                  class="bio-card p-4 rounded-3"
+                  style="
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                  "
+                >
+                  <h6 class="fw-bold mb-3" style="color: var(--text-primary)">
+                    <i
+                      class="bi bi-person-badge me-2"
+                      style="color: #ff6b35"
+                    ></i
+                    >About Me
                   </h6>
-                  <p class="mb-3">
+                  <p
+                    class="mb-3"
+                    style="
+                      color: var(--text-secondary);
+                      line-height: 1.6;
+                      font-size: 0.95rem;
+                    "
+                  >
                     <i class="bi bi-chat-left-quote text-warning me-2"></i>
                     Hello! I'm
-                    <span class="text-warning fw-bold">Tanzeel Ahmed</span>, a
-                    passionate full-stack developer who loves creating beautiful
-                    and functional web applications. This weather app is one of
-                    my projects that combines my interest in meteorology with my
-                    web development skills.
+                    <span style="color: #ff6b35; font-weight: 600"
+                      >Tanzeel Ahmed</span
+                    >, a passionate full-stack developer who loves creating
+                    beautiful and functional web applications. This weather app
+                    is one of my projects that combines my interest in
+                    meteorology with my web development skills.
                   </p>
-                  <p class="mb-0">
+                  <p
+                    class="mb-0"
+                    style="
+                      color: var(--text-secondary);
+                      line-height: 1.6;
+                      font-size: 0.95rem;
+                    "
+                  >
                     <i class="bi bi-lightbulb text-warning me-2"></i>
                     I believe in creating applications that are not only
                     functional but also provide an exceptional user experience.
@@ -693,35 +707,227 @@
               </div>
 
               <div class="skills-section mb-4">
-                <div class="skills-card p-4 rounded-3">
-                  <h6 class="fw-bold mb-3">
-                    <i class="bi bi-tools me-2"></i>Technologies Used in This
-                    Project
+                <div
+                  class="skills-card p-4 rounded-3"
+                  style="
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                  "
+                >
+                  <h6 class="fw-bold mb-3" style="color: var(--text-primary)">
+                    <i class="bi bi-tools me-2" style="color: #ff6b35"></i
+                    >Technologies Used
                   </h6>
-                  <div class="skills-grid">
-                    <div class="skill-item" data-tooltip="HTML5">
-                      <i class="bi bi-filetype-html text-danger fs-3"></i>
-                      <span class="skill-name">HTML5</span>
+                  <div
+                    class="skills-grid"
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(80px, 1fr)
+                      );
+                      gap: 15px;
+                      margin-top: 1rem;
+                    "
+                  >
+                    <div
+                      class="skill-item"
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 12px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 10px;
+                        border: 1px solid var(--border-color);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                      "
+                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#ef4444'; this.style.background='rgba(239,68,68,0.1)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                    >
+                      <i
+                        class="bi bi-filetype-html"
+                        style="
+                          font-size: 2rem;
+                          color: #ef4444;
+                          margin-bottom: 5px;
+                        "
+                      ></i>
+                      <span
+                        style="
+                          font-size: 0.8rem;
+                          color: var(--text-secondary);
+                          margin-top: 5px;
+                        "
+                        >HTML5</span
+                      >
                     </div>
-                    <div class="skill-item" data-tooltip="CSS3">
-                      <i class="bi bi-filetype-css text-primary fs-3"></i>
-                      <span class="skill-name">CSS3</span>
+                    <div
+                      class="skill-item"
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 12px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 10px;
+                        border: 1px solid var(--border-color);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                      "
+                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#3b82f6'; this.style.background='rgba(59,130,246,0.1)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                    >
+                      <i
+                        class="bi bi-filetype-css"
+                        style="
+                          font-size: 2rem;
+                          color: #3b82f6;
+                          margin-bottom: 5px;
+                        "
+                      ></i>
+                      <span
+                        style="
+                          font-size: 0.8rem;
+                          color: var(--text-secondary);
+                          margin-top: 5px;
+                        "
+                        >CSS3</span
+                      >
                     </div>
-                    <div class="skill-item" data-tooltip="JavaScript">
-                      <i class="bi bi-filetype-js text-warning fs-3"></i>
-                      <span class="skill-name">JavaScript</span>
+                    <div
+                      class="skill-item"
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 12px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 10px;
+                        border: 1px solid var(--border-color);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                      "
+                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#f59e0b'; this.style.background='rgba(245,158,11,0.1)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                    >
+                      <i
+                        class="bi bi-filetype-js"
+                        style="
+                          font-size: 2rem;
+                          color: #f59e0b;
+                          margin-bottom: 5px;
+                        "
+                      ></i>
+                      <span
+                        style="
+                          font-size: 0.8rem;
+                          color: var(--text-secondary);
+                          margin-top: 5px;
+                        "
+                        >JavaScript</span
+                      >
                     </div>
-                    <div class="skill-item" data-tooltip="Bootstrap 5">
-                      <i class="bi bi-bootstrap text-purple fs-3"></i>
-                      <span class="skill-name">Bootstrap 5</span>
+                    <div
+                      class="skill-item"
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 12px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 10px;
+                        border: 1px solid var(--border-color);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                      "
+                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#8b5cf6'; this.style.background='rgba(139,92,246,0.1)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                    >
+                      <i
+                        class="bi bi-bootstrap"
+                        style="
+                          font-size: 2rem;
+                          color: #8b5cf6;
+                          margin-bottom: 5px;
+                        "
+                      ></i>
+                      <span
+                        style="
+                          font-size: 0.8rem;
+                          color: var(--text-secondary);
+                          margin-top: 5px;
+                        "
+                        >Bootstrap</span
+                      >
                     </div>
-                    <div class="skill-item" data-tooltip="OpenWeather API">
-                      <i class="bi bi-cloud-arrow-up text-info fs-3"></i>
-                      <span class="skill-name">Weather API</span>
+                    <div
+                      class="skill-item"
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 12px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 10px;
+                        border: 1px solid var(--border-color);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                      "
+                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#06b6d4'; this.style.background='rgba(6,182,212,0.1)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                    >
+                      <i
+                        class="bi bi-cloud-arrow-up"
+                        style="
+                          font-size: 2rem;
+                          color: #06b6d4;
+                          margin-bottom: 5px;
+                        "
+                      ></i>
+                      <span
+                        style="
+                          font-size: 0.8rem;
+                          color: var(--text-secondary);
+                          margin-top: 5px;
+                        "
+                        >Weather API</span
+                      >
                     </div>
-                    <div class="skill-item" data-tooltip="GitHub">
-                      <i class="bi bi-github fs-3"></i>
-                      <span class="skill-name">GitHub</span>
+                    <div
+                      class="skill-item"
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 12px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 10px;
+                        border: 1px solid var(--border-color);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                      "
+                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#6b7280'; this.style.background='rgba(107,114,128,0.1)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                    >
+                      <i
+                        class="bi bi-github"
+                        style="
+                          font-size: 2rem;
+                          color: #6b7280;
+                          margin-bottom: 5px;
+                        "
+                      ></i>
+                      <span
+                        style="
+                          font-size: 0.8rem;
+                          color: var(--text-secondary);
+                          margin-top: 5px;
+                        "
+                        >GitHub</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -735,13 +941,26 @@
               data-aos="fade-left"
               data-aos-duration="600"
             >
-              <div class="contact-card rounded-3 p-4 h-100">
+              <div
+                class="contact-card rounded-3 p-4 h-100"
+                style="
+                  background: var(--card-bg);
+                  border: 1px solid var(--border-color);
+                  position: relative;
+                  overflow: hidden;
+                "
+              >
                 <div class="text-center mb-4">
                   <div class="contact-icon mb-3">
-                    <i class="bi bi-envelope-at-fill text-warning fs-1"></i>
+                    <i
+                      class="bi bi-envelope-at-fill"
+                      style="font-size: 3rem; color: #ff6b35"
+                    ></i>
                   </div>
-                  <h5 class="fw-bold mb-2">Contact & Connect</h5>
-                  <p class="text-light opacity-75">
+                  <h5 class="fw-bold mb-2" style="color: var(--text-primary)">
+                    Contact & Connect
+                  </h5>
+                  <p style="color: var(--text-secondary); font-size: 0.9rem">
                     Let's build something amazing together!
                   </p>
                 </div>
@@ -749,112 +968,406 @@
                 <div class="contact-info mb-4">
                   <a
                     href="mailto:tanzeel.ahmed.se@gmail.com"
-                    class="contact-item mb-3 text-decoration-none"
+                    class="contact-item mb-3 text-decoration-none d-flex align-items-center"
+                    style="
+                      padding: 10px 12px;
+                      background: rgba(255, 255, 255, 0.05);
+                      border-radius: 8px;
+                      border-left: 4px solid #ff6b35;
+                      transition: all 0.3s ease;
+                      color: inherit;
+                    "
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(255,107,53,0.1)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.05)';"
                   >
-                    <i class="bi bi-envelope text-warning"></i>
-                    <div>
-                      <small class="text-light opacity-75">Email</small>
-                      <p class="mb-0 text-light fw-medium">
-                        tanzeel.ahmed.se@gmail.com
-                      </p>
+                    <i
+                      class="bi bi-envelope"
+                      style="
+                        font-size: 1.2rem;
+                        color: #ff6b35;
+                        margin-right: 12px;
+                        width: 24px;
+                      "
+                    ></i>
+                    <div style="flex: 1">
+                      <small
+                        style="
+                          color: var(--text-secondary);
+                          font-size: 0.8rem;
+                          display: block;
+                        "
+                        >Email</small
+                      >
+                      <span
+                        style="
+                          color: var(--text-primary);
+                          font-size: 0.9rem;
+                          font-weight: 500;
+                        "
+                        >tanzeel.ahmed.se@gmail.com</span
+                      >
                     </div>
-                    <i class="bi bi-arrow-right text-light opacity-75"></i>
+                    <i
+                      class="bi bi-arrow-right"
+                      style="color: var(--text-secondary); font-size: 0.9rem"
+                    ></i>
                   </a>
 
                   <a
                     href="https://github.com/Tanzeel804"
                     target="_blank"
-                    class="contact-item mb-3 text-decoration-none"
+                    class="contact-item mb-3 text-decoration-none d-flex align-items-center"
+                    style="
+                      padding: 10px 12px;
+                      background: rgba(255, 255, 255, 0.05);
+                      border-radius: 8px;
+                      border-left: 4px solid #333333;
+                      transition: all 0.3s ease;
+                      color: inherit;
+                    "
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(51,51,51,0.1)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.05)';"
                   >
-                    <i class="bi bi-github"></i>
-                    <div>
-                      <small class="text-light opacity-75">GitHub</small>
-                      <p class="mb-0 text-light fw-medium">@Tanzeel804</p>
+                    <i
+                      class="bi bi-github"
+                      style="
+                        font-size: 1.2rem;
+                        color: #333333;
+                        margin-right: 12px;
+                        width: 24px;
+                      "
+                    ></i>
+                    <div style="flex: 1">
+                      <small
+                        style="
+                          color: var(--text-secondary);
+                          font-size: 0.8rem;
+                          display: block;
+                        "
+                        >GitHub</small
+                      >
+                      <span
+                        style="
+                          color: var(--text-primary);
+                          font-size: 0.9rem;
+                          font-weight: 500;
+                        "
+                        >@Tanzeel804</span
+                      >
                     </div>
                     <i
-                      class="bi bi-box-arrow-up-right text-light opacity-75"
+                      class="bi bi-box-arrow-up-right"
+                      style="color: var(--text-secondary); font-size: 0.9rem"
                     ></i>
                   </a>
 
                   <a
                     href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/"
                     target="_blank"
-                    class="contact-item text-decoration-none"
+                    class="contact-item text-decoration-none d-flex align-items-center"
+                    style="
+                      padding: 10px 12px;
+                      background: rgba(255, 255, 255, 0.05);
+                      border-radius: 8px;
+                      border-left: 4px solid #0a66c2;
+                      transition: all 0.3s ease;
+                      color: inherit;
+                    "
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(10,102,194,0.1)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.05)';"
                   >
-                    <i class="bi bi-linkedin text-primary"></i>
-                    <div>
-                      <small class="text-light opacity-75">LinkedIn</small>
-                      <p class="mb-0 text-light fw-medium">Tanzeel Ahmed</p>
+                    <i
+                      class="bi bi-linkedin"
+                      style="
+                        font-size: 1.2rem;
+                        color: #0a66c2;
+                        margin-right: 12px;
+                        width: 24px;
+                      "
+                    ></i>
+                    <div style="flex: 1">
+                      <small
+                        style="
+                          color: var(--text-secondary);
+                          font-size: 0.8rem;
+                          display: block;
+                        "
+                        >LinkedIn</small
+                      >
+                      <span
+                        style="
+                          color: var(--text-primary);
+                          font-size: 0.9rem;
+                          font-weight: 500;
+                        "
+                        >Tanzeel Ahmed</span
+                      >
                     </div>
                     <i
-                      class="bi bi-box-arrow-up-right text-light opacity-75"
+                      class="bi bi-box-arrow-up-right"
+                      style="color: var(--text-secondary); font-size: 0.9rem"
                     ></i>
                   </a>
                 </div>
 
                 <div class="social-links-grid text-center">
-                  <h6 class="mb-3">
-                    <i class="bi bi-share me-2"></i>Follow Me
+                  <h6 class="mb-3" style="color: var(--text-primary)">
+                    <i class="bi bi-share me-2" style="color: #ff6b35"></i
+                    >Follow Me
                   </h6>
                   <div class="row g-2">
                     <div class="col-4">
                       <a
                         href="https://twitter.com/TanzeelOnX"
                         target="_blank"
-                        class="social-btn twitter"
-                        title="Twitter/X"
+                        class="social-btn d-flex align-items-center justify-content-center"
+                        style="
+                          height: 45px;
+                          border-radius: 8px;
+                          background: #000000;
+                          color: white;
+                          text-decoration: none;
+                          transition: all 0.3s ease;
+                          position: relative;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none';"
                       >
-                        <i class="bi bi-twitter-x fs-5"></i>
+                        <i
+                          class="bi bi-twitter-x"
+                          style="font-size: 1.2rem"
+                        ></i>
+                        <span
+                          class="social-tooltip"
+                          style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            pointer-events: none;
+                          "
+                        >
+                          Twitter/X
+                        </span>
                       </a>
                     </div>
                     <div class="col-4">
                       <a
                         href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/"
                         target="_blank"
-                        class="social-btn linkedin"
-                        title="LinkedIn"
+                        class="social-btn d-flex align-items-center justify-content-center"
+                        style="
+                          height: 45px;
+                          border-radius: 8px;
+                          background: #0a66c2;
+                          color: white;
+                          text-decoration: none;
+                          transition: all 0.3s ease;
+                          position: relative;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)'; this.querySelector('.social-tooltip').style.opacity='1';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none'; this.querySelector('.social-tooltip').style.opacity='0';"
                       >
-                        <i class="bi bi-linkedin fs-5"></i>
+                        <i class="bi bi-linkedin" style="font-size: 1.2rem"></i>
+                        <span
+                          class="social-tooltip"
+                          style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            pointer-events: none;
+                          "
+                        >
+                          LinkedIn
+                        </span>
                       </a>
                     </div>
                     <div class="col-4">
                       <a
                         href="https://www.tiktok.com/@therealtanzeel"
                         target="_blank"
-                        class="social-btn tiktok"
-                        title="TikTok"
+                        class="social-btn d-flex align-items-center justify-content-center"
+                        style="
+                          height: 45px;
+                          border-radius: 8px;
+                          background: #000000;
+                          color: white;
+                          text-decoration: none;
+                          transition: all 0.3s ease;
+                          position: relative;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)'; this.querySelector('.social-tooltip').style.opacity='1';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none'; this.querySelector('.social-tooltip').style.opacity='0';"
                       >
-                        <i class="bi bi-tiktok fs-5"></i>
+                        <i class="bi bi-tiktok" style="font-size: 1.2rem"></i>
+                        <span
+                          class="social-tooltip"
+                          style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            pointer-events: none;
+                          "
+                        >
+                          TikTok
+                        </span>
                       </a>
                     </div>
                     <div class="col-4">
                       <a
                         href="https://www.instagram.com/tanzeelahmedpov"
                         target="_blank"
-                        class="social-btn instagram"
-                        title="Instagram"
+                        class="social-btn d-flex align-items-center justify-content-center"
+                        style="
+                          height: 45px;
+                          border-radius: 8px;
+                          background: linear-gradient(
+                            45deg,
+                            #405de6,
+                            #5851db,
+                            #833ab4,
+                            #c13584,
+                            #e1306c,
+                            #fd1d1d
+                          );
+                          color: white;
+                          text-decoration: none;
+                          transition: all 0.3s ease;
+                          position: relative;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)'; this.querySelector('.social-tooltip').style.opacity='1';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none'; this.querySelector('.social-tooltip').style.opacity='0';"
                       >
-                        <i class="bi bi-instagram fs-5"></i>
+                        <i
+                          class="bi bi-instagram"
+                          style="font-size: 1.2rem"
+                        ></i>
+                        <span
+                          class="social-tooltip"
+                          style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            pointer-events: none;
+                          "
+                        >
+                          Instagram
+                        </span>
                       </a>
                     </div>
                     <div class="col-4">
                       <a
                         href="https://www.facebook.com/tanzeelahmedpov"
                         target="_blank"
-                        class="social-btn facebook"
-                        title="Facebook"
+                        class="social-btn d-flex align-items-center justify-content-center"
+                        style="
+                          height: 45px;
+                          border-radius: 8px;
+                          background: #1877f2;
+                          color: white;
+                          text-decoration: none;
+                          transition: all 0.3s ease;
+                          position: relative;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)'; this.querySelector('.social-tooltip').style.opacity='1';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none'; this.querySelector('.social-tooltip').style.opacity='0';"
                       >
-                        <i class="bi bi-facebook fs-5"></i>
+                        <i class="bi bi-facebook" style="font-size: 1.2rem"></i>
+                        <span
+                          class="social-tooltip"
+                          style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            pointer-events: none;
+                          "
+                        >
+                          Facebook
+                        </span>
                       </a>
                     </div>
                     <div class="col-4">
                       <a
                         href="https://github.com/Tanzeel804"
                         target="_blank"
-                        class="social-btn github"
-                        title="GitHub"
+                        class="social-btn d-flex align-items-center justify-content-center"
+                        style="
+                          height: 45px;
+                          border-radius: 8px;
+                          background: #333333;
+                          color: white;
+                          text-decoration: none;
+                          transition: all 0.3s ease;
+                          position: relative;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)'; this.querySelector('.social-tooltip').style.opacity='1';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none'; this.querySelector('.social-tooltip').style.opacity='0';"
                       >
-                        <i class="bi bi-github fs-5"></i>
+                        <i class="bi bi-github" style="font-size: 1.2rem"></i>
+                        <span
+                          class="social-tooltip"
+                          style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            pointer-events: none;
+                          "
+                        >
+                          GitHub
+                        </span>
                       </a>
                     </div>
                   </div>
@@ -864,9 +1377,24 @@
                   <a
                     href="https://github.com/Tanzeel804?tab=repositories"
                     target="_blank"
-                    class="btn btn-warning btn-sm w-100"
+                    class="btn btn-warning btn-sm w-100 d-flex align-items-center justify-content-center"
+                    style="
+                      padding: 8px 16px;
+                      font-size: 0.9rem;
+                      background: linear-gradient(
+                        135deg,
+                        #ff9a3c 0%,
+                        #ff6b6b 100%
+                      );
+                      border: none;
+                      color: #000;
+                      font-weight: 600;
+                      transition: all 0.3s ease;
+                    "
+                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
                   >
-                    <i class="bi bi-box-arrow-up-right me-1"></i> View All
+                    <i class="bi bi-box-arrow-up-right me-2"></i> View All
                     Projects
                   </a>
                 </div>
@@ -875,6 +1403,7 @@
           </div>
         </div>
       </div>
+
       <!-- Footer -->
       <footer class="footer py-5" data-aos="fade-up" data-aos-duration="800">
         <div class="container">
