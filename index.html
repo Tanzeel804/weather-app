@@ -501,8 +501,8 @@
           <!-- Alerts will be added here -->
         </div>
       </div>
-      <!-- Developer Section -->
 
+      <!-- Developer Section -->
       <div
         class="developer-section mb-5"
         id="developer"
@@ -510,7 +510,9 @@
         data-aos-duration="800"
       >
         <div class="section-header mb-4">
-          <h5><i class="bi bi-code-slash me-2"></i>Meet the Developer</h5>
+          <h5 style="color: var(--text-primary)">
+            <i class="bi bi-code-slash me-2"></i>Meet the Developer
+          </h5>
         </div>
         <div class="row">
           <div class="col-md-8">
@@ -572,15 +574,17 @@
                         style="
                           display: inline-flex;
                           align-items: center;
-                          background: rgba(59, 130, 246, 0.1);
-                          color: #3b82f6;
+                          background: rgba(59, 130, 246, 0.15);
+                          color: #2563eb !important;
                           padding: 4px 10px;
                           border-radius: 16px;
                           font-size: 0.8rem;
                           margin: 2px;
-                          border: 1px solid rgba(59, 130, 246, 0.3);
+                          border: 1px solid rgba(59, 130, 246, 0.4);
                           transition: all 0.3s ease;
                         "
+                        onmouseover="this.style.background='rgba(59,130,246,0.3)'; this.style.transform='translateY(-2px)';"
+                        onmouseout="this.style.background='rgba(59,130,246,0.15)'; this.style.transform='translateY(0)';"
                       >
                         <i
                           class="bi bi-code-slash me-1"
@@ -593,15 +597,17 @@
                         style="
                           display: inline-flex;
                           align-items: center;
-                          background: rgba(139, 92, 246, 0.1);
-                          color: #8b5cf6;
+                          background: rgba(139, 92, 246, 0.15);
+                          color: #7c3aed !important;
                           padding: 4px 10px;
                           border-radius: 16px;
                           font-size: 0.8rem;
                           margin: 2px;
-                          border: 1px solid rgba(139, 92, 246, 0.3);
+                          border: 1px solid rgba(139, 92, 246, 0.4);
                           transition: all 0.3s ease;
                         "
+                        onmouseover="this.style.background='rgba(139,92,246,0.3)'; this.style.transform='translateY(-2px)';"
+                        onmouseout="this.style.background='rgba(139,92,246,0.15)'; this.style.transform='translateY(0)';"
                       >
                         <i
                           class="bi bi-palette me-1"
@@ -614,15 +620,17 @@
                         style="
                           display: inline-flex;
                           align-items: center;
-                          background: rgba(14, 165, 233, 0.1);
-                          color: #06b6d4;
+                          background: rgba(14, 165, 233, 0.15);
+                          color: #0ea5e9 !important;
                           padding: 4px 10px;
                           border-radius: 16px;
                           font-size: 0.8rem;
                           margin: 2px;
-                          border: 1px solid rgba(14, 165, 233, 0.3);
+                          border: 1px solid rgba(14, 165, 233, 0.4);
                           transition: all 0.3s ease;
                         "
+                        onmouseover="this.style.background='rgba(14,165,233,0.3)'; this.style.transform='translateY(-2px)';"
+                        onmouseout="this.style.background='rgba(14,165,233,0.15)'; this.style.transform='translateY(0)';"
                       >
                         <i
                           class="bi bi-cloud-sun me-1"
@@ -635,15 +643,17 @@
                         style="
                           display: inline-flex;
                           align-items: center;
-                          background: rgba(245, 158, 11, 0.1);
-                          color: #f59e0b;
+                          background: rgba(245, 158, 11, 0.15);
+                          color: #d97706 !important;
                           padding: 4px 10px;
                           border-radius: 16px;
                           font-size: 0.8rem;
                           margin: 2px;
-                          border: 1px solid rgba(245, 158, 11, 0.3);
+                          border: 1px solid rgba(245, 158, 11, 0.4);
                           transition: all 0.3s ease;
                         "
+                        onmouseover="this.style.background='rgba(245,158,11,0.3)'; this.style.transform='translateY(-2px)';"
+                        onmouseout="this.style.background='rgba(245,158,11,0.15)'; this.style.transform='translateY(0)';"
                       >
                         <i
                           class="bi bi-filetype-js me-1"
@@ -660,10 +670,12 @@
                 <div
                   class="bio-card p-4 rounded-3"
                   style="
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(255, 255, 255, 0.08);
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
                   "
+                  onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#ff6b35';"
+                  onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';"
                 >
                   <h6 class="fw-bold mb-3" style="color: var(--text-primary)">
                     <i
@@ -675,7 +687,7 @@
                   <p
                     class="mb-3"
                     style="
-                      color: var(--text-secondary);
+                      color: var(--text-primary);
                       line-height: 1.6;
                       font-size: 0.95rem;
                     "
@@ -692,7 +704,7 @@
                   <p
                     class="mb-0"
                     style="
-                      color: var(--text-secondary);
+                      color: var(--text-primary);
                       line-height: 1.6;
                       font-size: 0.95rem;
                     "
@@ -710,10 +722,12 @@
                 <div
                   class="skills-card p-4 rounded-3"
                   style="
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(255, 255, 255, 0.08);
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
                   "
+                  onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#ff6b35';"
+                  onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';"
                 >
                   <h6 class="fw-bold mb-3" style="color: var(--text-primary)">
                     <i class="bi bi-tools me-2" style="color: #ff6b35"></i
@@ -738,14 +752,14 @@
                         flex-direction: column;
                         align-items: center;
                         padding: 12px;
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
                         border-radius: 10px;
-                        border: 1px solid var(--border-color);
+                        border: 2px solid var(--border-color);
                         transition: all 0.3s ease;
                         cursor: pointer;
                       "
-                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#ef4444'; this.style.background='rgba(239,68,68,0.1)';"
-                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                      onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#ef4444'; this.style.background='rgba(239,68,68,0.2)'; this.querySelector('i').style.transform='scale(1.2)'; this.querySelector('span').style.color='#ef4444';"
+                      onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.08)'; this.querySelector('i').style.transform='scale(1)'; this.querySelector('span').style.color='var(--text-primary)';"
                     >
                       <i
                         class="bi bi-filetype-html"
@@ -753,13 +767,16 @@
                           font-size: 2rem;
                           color: #ef4444;
                           margin-bottom: 5px;
+                          transition: all 0.3s ease;
                         "
                       ></i>
                       <span
                         style="
                           font-size: 0.8rem;
-                          color: var(--text-secondary);
+                          color: var(--text-primary);
                           margin-top: 5px;
+                          font-weight: 500;
+                          transition: all 0.3s ease;
                         "
                         >HTML5</span
                       >
@@ -771,14 +788,14 @@
                         flex-direction: column;
                         align-items: center;
                         padding: 12px;
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
                         border-radius: 10px;
-                        border: 1px solid var(--border-color);
+                        border: 2px solid var(--border-color);
                         transition: all 0.3s ease;
                         cursor: pointer;
                       "
-                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#3b82f6'; this.style.background='rgba(59,130,246,0.1)';"
-                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                      onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#3b82f6'; this.style.background='rgba(59,130,246,0.2)'; this.querySelector('i').style.transform='scale(1.2)'; this.querySelector('span').style.color='#3b82f6';"
+                      onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.08)'; this.querySelector('i').style.transform='scale(1)'; this.querySelector('span').style.color='var(--text-primary)';"
                     >
                       <i
                         class="bi bi-filetype-css"
@@ -786,13 +803,16 @@
                           font-size: 2rem;
                           color: #3b82f6;
                           margin-bottom: 5px;
+                          transition: all 0.3s ease;
                         "
                       ></i>
                       <span
                         style="
                           font-size: 0.8rem;
-                          color: var(--text-secondary);
+                          color: var(--text-primary);
                           margin-top: 5px;
+                          font-weight: 500;
+                          transition: all 0.3s ease;
                         "
                         >CSS3</span
                       >
@@ -804,14 +824,14 @@
                         flex-direction: column;
                         align-items: center;
                         padding: 12px;
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
                         border-radius: 10px;
-                        border: 1px solid var(--border-color);
+                        border: 2px solid var(--border-color);
                         transition: all 0.3s ease;
                         cursor: pointer;
                       "
-                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#f59e0b'; this.style.background='rgba(245,158,11,0.1)';"
-                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                      onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#f59e0b'; this.style.background='rgba(245,158,11,0.2)'; this.querySelector('i').style.transform='scale(1.2)'; this.querySelector('span').style.color='#f59e0b';"
+                      onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.08)'; this.querySelector('i').style.transform='scale(1)'; this.querySelector('span').style.color='var(--text-primary)';"
                     >
                       <i
                         class="bi bi-filetype-js"
@@ -819,13 +839,16 @@
                           font-size: 2rem;
                           color: #f59e0b;
                           margin-bottom: 5px;
+                          transition: all 0.3s ease;
                         "
                       ></i>
                       <span
                         style="
                           font-size: 0.8rem;
-                          color: var(--text-secondary);
+                          color: var(--text-primary);
                           margin-top: 5px;
+                          font-weight: 500;
+                          transition: all 0.3s ease;
                         "
                         >JavaScript</span
                       >
@@ -837,14 +860,14 @@
                         flex-direction: column;
                         align-items: center;
                         padding: 12px;
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
                         border-radius: 10px;
-                        border: 1px solid var(--border-color);
+                        border: 2px solid var(--border-color);
                         transition: all 0.3s ease;
                         cursor: pointer;
                       "
-                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#8b5cf6'; this.style.background='rgba(139,92,246,0.1)';"
-                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                      onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#8b5cf6'; this.style.background='rgba(139,92,246,0.2)'; this.querySelector('i').style.transform='scale(1.2)'; this.querySelector('span').style.color='#8b5cf6';"
+                      onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.08)'; this.querySelector('i').style.transform='scale(1)'; this.querySelector('span').style.color='var(--text-primary)';"
                     >
                       <i
                         class="bi bi-bootstrap"
@@ -852,13 +875,16 @@
                           font-size: 2rem;
                           color: #8b5cf6;
                           margin-bottom: 5px;
+                          transition: all 0.3s ease;
                         "
                       ></i>
                       <span
                         style="
                           font-size: 0.8rem;
-                          color: var(--text-secondary);
+                          color: var(--text-primary);
                           margin-top: 5px;
+                          font-weight: 500;
+                          transition: all 0.3s ease;
                         "
                         >Bootstrap</span
                       >
@@ -870,14 +896,14 @@
                         flex-direction: column;
                         align-items: center;
                         padding: 12px;
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
                         border-radius: 10px;
-                        border: 1px solid var(--border-color);
+                        border: 2px solid var(--border-color);
                         transition: all 0.3s ease;
                         cursor: pointer;
                       "
-                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#06b6d4'; this.style.background='rgba(6,182,212,0.1)';"
-                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                      onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#06b6d4'; this.style.background='rgba(6,182,212,0.2)'; this.querySelector('i').style.transform='scale(1.2)'; this.querySelector('span').style.color='#06b6d4';"
+                      onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.08)'; this.querySelector('i').style.transform='scale(1)'; this.querySelector('span').style.color='var(--text-primary)';"
                     >
                       <i
                         class="bi bi-cloud-arrow-up"
@@ -885,13 +911,16 @@
                           font-size: 2rem;
                           color: #06b6d4;
                           margin-bottom: 5px;
+                          transition: all 0.3s ease;
                         "
                       ></i>
                       <span
                         style="
                           font-size: 0.8rem;
-                          color: var(--text-secondary);
+                          color: var(--text-primary);
                           margin-top: 5px;
+                          font-weight: 500;
+                          transition: all 0.3s ease;
                         "
                         >Weather API</span
                       >
@@ -903,14 +932,14 @@
                         flex-direction: column;
                         align-items: center;
                         padding: 12px;
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
                         border-radius: 10px;
-                        border: 1px solid var(--border-color);
+                        border: 2px solid var(--border-color);
                         transition: all 0.3s ease;
                         cursor: pointer;
                       "
-                      onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#6b7280'; this.style.background='rgba(107,114,128,0.1)';"
-                      onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.05)';"
+                      onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.borderColor='#6b7280'; this.style.background='rgba(107,114,128,0.2)'; this.querySelector('i').style.transform='scale(1.2)'; this.querySelector('span').style.color='#6b7280';"
+                      onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.borderColor='var(--border-color)'; this.style.background='rgba(255,255,255,0.08)'; this.querySelector('i').style.transform='scale(1)'; this.querySelector('span').style.color='var(--text-primary)';"
                     >
                       <i
                         class="bi bi-github"
@@ -918,13 +947,16 @@
                           font-size: 2rem;
                           color: #6b7280;
                           margin-bottom: 5px;
+                          transition: all 0.3s ease;
                         "
                       ></i>
                       <span
                         style="
                           font-size: 0.8rem;
-                          color: var(--text-secondary);
+                          color: var(--text-primary);
                           margin-top: 5px;
+                          font-weight: 500;
+                          transition: all 0.3s ease;
                         "
                         >GitHub</span
                       >
@@ -960,7 +992,7 @@
                   <h5 class="fw-bold mb-2" style="color: var(--text-primary)">
                     Contact & Connect
                   </h5>
-                  <p style="color: var(--text-secondary); font-size: 0.9rem">
+                  <p style="color: var(--text-primary); font-size: 0.9rem">
                     Let's build something amazing together!
                   </p>
                 </div>
@@ -971,14 +1003,14 @@
                     class="contact-item mb-3 text-decoration-none d-flex align-items-center"
                     style="
                       padding: 10px 12px;
-                      background: rgba(255, 255, 255, 0.05);
+                      background: rgba(255, 255, 255, 0.08);
                       border-radius: 8px;
                       border-left: 4px solid #ff6b35;
                       transition: all 0.3s ease;
                       color: inherit;
                     "
-                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(255,107,53,0.1)';"
-                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.05)';"
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(255,107,53,0.15)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.08)';"
                   >
                     <i
                       class="bi bi-envelope"
@@ -1019,14 +1051,14 @@
                     class="contact-item mb-3 text-decoration-none d-flex align-items-center"
                     style="
                       padding: 10px 12px;
-                      background: rgba(255, 255, 255, 0.05);
+                      background: rgba(255, 255, 255, 0.08);
                       border-radius: 8px;
                       border-left: 4px solid #333333;
                       transition: all 0.3s ease;
                       color: inherit;
                     "
-                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(51,51,51,0.1)';"
-                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.05)';"
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(51,51,51,0.15)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.08)';"
                   >
                     <i
                       class="bi bi-github"
@@ -1067,14 +1099,14 @@
                     class="contact-item text-decoration-none d-flex align-items-center"
                     style="
                       padding: 10px 12px;
-                      background: rgba(255, 255, 255, 0.05);
+                      background: rgba(255, 255, 255, 0.08);
                       border-radius: 8px;
                       border-left: 4px solid #0a66c2;
                       transition: all 0.3s ease;
                       color: inherit;
                     "
-                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(10,102,194,0.1)';"
-                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.05)';"
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.background='rgba(10,102,194,0.15)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.08)';"
                   >
                     <i
                       class="bi bi-linkedin"
@@ -1403,7 +1435,6 @@
           </div>
         </div>
       </div>
-
       <!-- Footer -->
       <footer class="footer py-5" data-aos="fade-up" data-aos-duration="800">
         <div class="container">
