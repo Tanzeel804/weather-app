@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Pro | Real-Time Weather Forecasting</title>
 
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- AOS (Animate On Scroll) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -21,707 +30,1022 @@
     <link rel="stylesheet" href="style.css" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>" />
-</head>
-<body>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>"
+    />
+  </head>
+  <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid px-3">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-cloud-sun-fill me-2"></i>
-                <span class="brand-text d-none d-sm-inline">Weather<span class="text-warning">Pro</span></span>
-            </a>
+      <div class="container-fluid px-3">
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-cloud-sun-fill me-2"></i>
+          <span class="brand-text d-none d-sm-inline"
+            >Weather<span class="text-warning">Pro</span></span
+          >
+        </a>
 
-            <!-- Mobile Search Toggle -->
-            <button class="btn btn-outline-light btn-sm d-lg-none me-2" id="mobileSearchToggle">
-                <i class="bi bi-search"></i>
-            </button>
+        <!-- Mobile Search Toggle -->
+        <button
+          class="btn btn-outline-light btn-sm d-lg-none me-2"
+          id="mobileSearchToggle"
+        >
+          <i class="bi bi-search"></i>
+        </button>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">
-                            <i class="bi bi-house-door me-1"></i>
-                            <span class="d-none d-md-inline">Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#forecast">
-                            <i class="bi bi-graph-up me-1"></i>
-                            <span class="d-none d-md-inline">Forecast</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#maps">
-                            <i class="bi bi-map me-1"></i>
-                            <span class="d-none d-md-inline">Maps</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#alerts">
-                            <i class="bi bi-bell me-1"></i>
-                            <span class="d-none d-md-inline">Alerts</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#developer">
-                            <i class="bi bi-code-slash me-1"></i>
-                            <span class="d-none d-md-inline">Developer</span>
-                        </a>
-                    </li>
-                </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#home">
+                <i class="bi bi-house-door me-1"></i>
+                <span class="d-none d-md-inline">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#forecast">
+                <i class="bi bi-graph-up me-1"></i>
+                <span class="d-none d-md-inline">Forecast</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#maps">
+                <i class="bi bi-map me-1"></i>
+                <span class="d-none d-md-inline">Maps</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#alerts">
+                <i class="bi bi-bell me-1"></i>
+                <span class="d-none d-md-inline">Alerts</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#developer">
+                <i class="bi bi-code-slash me-1"></i>
+                <span class="d-none d-md-inline">Developer</span>
+              </a>
+            </li>
+          </ul>
 
-                <div class="d-flex align-items-center">
-                    <!-- Theme Toggle -->
-                    <div class="theme-toggle me-3">
-                        <button id="themeToggle" class="btn btn-sm btn-outline-light">
-                            <i class="bi bi-sun-fill"></i>
-                            <i class="bi bi-moon-fill d-none"></i>
-                        </button>
-                    </div>
-
-                    <!-- Current Time -->
-                    <div class="current-time text-light small d-none d-md-block">
-                        <i class="bi bi-clock me-1"></i>
-                        <span id="currentTime">00:00</span>
-                    </div>
-                </div>
+          <div class="d-flex align-items-center">
+            <!-- Theme Toggle -->
+            <div class="theme-toggle me-3">
+              <button id="themeToggle" class="btn btn-sm btn-outline-light">
+                <i class="bi bi-sun-fill"></i>
+                <i class="bi bi-moon-fill d-none"></i>
+              </button>
             </div>
+
+            <!-- Current Time -->
+            <div class="current-time text-light small d-none d-md-block">
+              <i class="bi bi-clock me-1"></i>
+              <span id="currentTime">00:00</span>
+            </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Mobile Search Bar -->
     <div class="mobile-search-bar d-lg-none" id="mobileSearchBar">
-        <div class="container-fluid p-3">
-            <div class="input-group">
-                <input type="text" id="mobileSearchField" class="form-control" placeholder="Search city..." autocomplete="off" />
-                <button class="btn btn-warning" type="button" id="mobileSearchBtn">
-                    <i class="bi bi-search"></i>
-                </button>
-                <button class="btn btn-outline-light" type="button" id="mobileLocationBtn">
-                    <i class="bi bi-geo-alt"></i>
-                </button>
-            </div>
+      <div class="container-fluid p-3">
+        <div class="input-group">
+          <input
+            type="text"
+            id="mobileSearchField"
+            class="form-control"
+            placeholder="Search city..."
+            autocomplete="off"
+          />
+          <button class="btn btn-warning" type="button" id="mobileSearchBtn">
+            <i class="bi bi-search"></i>
+          </button>
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            id="mobileLocationBtn"
+          >
+            <i class="bi bi-geo-alt"></i>
+          </button>
         </div>
+      </div>
     </div>
 
     <!-- Main Container -->
     <div class="container mt-5 pt-4" id="home">
-        <!-- Search Section (Desktop) -->
-        <div class="search-section mb-5 d-none d-lg-block" data-aos="fade-up" data-aos-duration="800">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="search-card p-4 rounded-4">
-                        <h4 class="text-center mb-4">
-                            <i class="bi bi-search me-2"></i> Find Your City Weather
-                        </h4>
+      <!-- Search Section (Desktop) -->
+      <div
+        class="search-section mb-5 d-none d-lg-block"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="search-card p-4 rounded-4">
+              <h4 class="text-center mb-4">
+                <i class="bi bi-search me-2"></i> Find Your City Weather
+              </h4>
 
-                        <div class="input-group input-group-lg mb-3">
-                            <input type="text" id="searchField" class="form-control" placeholder="Enter city name (e.g., London, New York, Tokyo)" autocomplete="off" />
-                            <button class="btn btn-warning" type="button" id="searchBtn">
-                                <i class="bi bi-search me-1"></i> Search
-                            </button>
-                            <button class="btn btn-outline-light" type="button" id="locationBtn" title="Use my location">
-                                <i class="bi bi-geo-alt"></i>
-                            </button>
-                        </div>
+              <div class="input-group input-group-lg mb-3">
+                <input
+                  type="text"
+                  id="searchField"
+                  class="form-control"
+                  placeholder="Enter city name (e.g., London, New York, Tokyo)"
+                  autocomplete="off"
+                />
+                <button class="btn btn-warning" type="button" id="searchBtn">
+                  <i class="bi bi-search me-1"></i> Search
+                </button>
+                <button
+                  class="btn btn-outline-light"
+                  type="button"
+                  id="locationBtn"
+                  title="Use my location"
+                >
+                  <i class="bi bi-geo-alt"></i>
+                </button>
+              </div>
 
-                        <!-- Quick Cities -->
-                        <div class="quick-cities text-center">
-                            <small class="text-light opacity-75 me-2">Quick Cities:</small>
-                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="London">
-                                <i class="bi bi-building"></i> London
-                            </button>
-                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="New York">
-                                <i class="bi bi-building"></i> New York
-                            </button>
-                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="Tokyo">
-                                <i class="bi bi-building"></i> Tokyo
-                            </button>
-                            <button class="btn btn-sm btn-outline-light me-2 mb-2" data-city="Delhi">
-                                <i class="bi bi-building"></i> Delhi
-                            </button>
-                            <button class="btn btn-sm btn-outline-light mb-2" data-city="Paris">
-                                <i class="bi bi-building"></i> Paris
-                            </button>
-                        </div>
-                    </div>
-                </div>
+              <!-- Quick Cities -->
+              <div class="quick-cities text-center">
+                <small class="text-light opacity-75 me-2">Quick Cities:</small>
+                <button
+                  class="btn btn-sm btn-outline-light me-2 mb-2"
+                  data-city="London"
+                >
+                  <i class="bi bi-building"></i> London
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-light me-2 mb-2"
+                  data-city="New York"
+                >
+                  <i class="bi bi-building"></i> New York
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-light me-2 mb-2"
+                  data-city="Tokyo"
+                >
+                  <i class="bi bi-building"></i> Tokyo
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-light me-2 mb-2"
+                  data-city="Delhi"
+                >
+                  <i class="bi bi-building"></i> Delhi
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-light mb-2"
+                  data-city="Paris"
+                >
+                  <i class="bi bi-building"></i> Paris
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Error Message -->
-        <div id="errorContainer" class="alert alert-danger alert-dismissible fade show d-none" role="alert" data-aos="fade-down" data-aos-duration="500">
-            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-            <span id="errorMessage"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <!-- Error Message -->
+      <div
+        id="errorContainer"
+        class="alert alert-danger alert-dismissible fade show d-none"
+        role="alert"
+        data-aos="fade-down"
+        data-aos-duration="500"
+      >
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <span id="errorMessage"></span>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div id="loadingSpinner" class="text-center d-none">
+        <div
+          class="spinner-border text-warning"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
         </div>
+        <p class="text-light mt-3">Fetching weather data...</p>
+      </div>
 
-        <!-- Loading Spinner -->
-        <div id="loadingSpinner" class="text-center d-none">
-            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem" role="status">
-                <span class="visually-hidden">Loading...</span>
+      <!-- Current Weather Card -->
+      <div
+        class="current-weather-card rounded-4 p-4 mb-4 shadow-lg"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-aos-duration="800"
+      >
+        <div class="row align-items-center">
+          <!-- City & Date -->
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="location-info">
+              <h2 id="cityName" class="fw-bold mb-1">Search a City</h2>
+              <p id="currentDate" class="text-light opacity-75 mb-2">--</p>
+              <p class="weather-status" id="weatherStatus">--</p>
             </div>
-            <p class="text-light mt-3">Fetching weather data...</p>
+          </div>
+
+          <!-- Temperature & Icon -->
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="temp-display text-center">
+              <div class="d-flex align-items-center justify-content-center">
+                <img
+                  id="weatherIcon"
+                  src="https://openweathermap.org/img/wn/01d@2x.png"
+                  alt="Weather"
+                  class="weather-icon me-3"
+                />
+                <div>
+                  <h1 class="display-2 fw-bold mb-0" id="temperature">--°C</h1>
+                  <p class="text-light opacity-75 mb-0">
+                    Feels like <span id="feelsLike">--°C</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Info -->
+          <div class="col-md-4">
+            <div class="additional-info">
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <div class="info-item">
+                    <i class="bi bi-wind"></i>
+                    <div>
+                      <small>Wind</small>
+                      <p class="fw-bold mb-0" id="windSpeed">-- km/h</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="info-item">
+                    <i class="bi bi-droplet-half"></i>
+                    <div>
+                      <small>Humidity</small>
+                      <p class="fw-bold mb-0" id="humidity">--%</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="info-item">
+                    <i class="bi bi-thermometer-half"></i>
+                    <div>
+                      <small>Pressure</small>
+                      <p class="fw-bold mb-0" id="pressure">-- hPa</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="info-item">
+                    <i class="bi bi-eye"></i>
+                    <div>
+                      <small>Visibility</small>
+                      <p class="fw-bold mb-0" id="visibility">-- km</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Current Weather Card -->
-        <div class="current-weather-card rounded-4 p-4 mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
-            <div class="row align-items-center">
-                <!-- City & Date -->
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="location-info">
-                        <h2 id="cityName" class="fw-bold mb-1">Search a City</h2>
-                        <p id="currentDate" class="text-light opacity-75 mb-2">--</p>
-                        <p class="weather-status" id="weatherStatus">--</p>
-                    </div>
-                </div>
-
-                <!-- Temperature & Icon -->
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="temp-display text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img id="weatherIcon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather" class="weather-icon me-3" />
-                            <div>
-                                <h1 class="display-2 fw-bold mb-0" id="temperature">--°C</h1>
-                                <p class="text-light opacity-75 mb-0">
-                                    Feels like <span id="feelsLike">--°C</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional Info -->
-                <div class="col-md-4">
-                    <div class="additional-info">
-                        <div class="row">
-                            <div class="col-6 mb-3">
-                                <div class="info-item">
-                                    <i class="bi bi-wind"></i>
-                                    <div>
-                                        <small>Wind</small>
-                                        <p class="fw-bold mb-0" id="windSpeed">-- km/h</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div class="info-item">
-                                    <i class="bi bi-droplet-half"></i>
-                                    <div>
-                                        <small>Humidity</small>
-                                        <p class="fw-bold mb-0" id="humidity">--%</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="info-item">
-                                    <i class="bi bi-thermometer-half"></i>
-                                    <div>
-                                        <small>Pressure</small>
-                                        <p class="fw-bold mb-0" id="pressure">-- hPa</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="info-item">
-                                    <i class="bi bi-eye"></i>
-                                    <div>
-                                        <small>Visibility</small>
-                                        <p class="fw-bold mb-0" id="visibility">-- km</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Weather Details Cards -->
-        <div class="row mb-4">
-            <!-- Sunrise/Sunset -->
-            <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-delay="200" data-aos-duration="600">
-                <div class="detail-card rounded-3 p-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-sun text-warning me-3 fs-4"></i>
-                        <h5 class="mb-0">Sun & Moon</h5>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="sun-item text-center p-3 rounded-3">
-                                <i class="bi bi-sunrise text-warning fs-3 mb-2"></i>
-                                <p class="mb-1">Sunrise</p>
-                                <h5 class="fw-bold" id="sunrise">--:--</h5>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="sun-item text-center p-3 rounded-3">
-                                <i class="bi bi-sunset text-warning fs-3 mb-2"></i>
-                                <p class="mb-1">Sunset</p>
-                                <h5 class="fw-bold" id="sunset">--:--</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-center">
-                        <p class="mb-1">
-                            Day Length: <span id="dayLength" class="fw-bold">--h --m</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Temperature Range -->
-            <div class="col-md-6 mb-4" data-aos="fade-left" data-aos-delay="200" data-aos-duration="600">
-                <div class="detail-card rounded-3 p-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-thermometer-half text-danger me-3 fs-4"></i>
-                        <h5 class="mb-0">Temperature Range</h5>
-                    </div>
-                    <div class="temp-range-chart">
-                        <div class="temp-labels d-flex justify-content-between mb-2">
-                            <small>Min</small>
-                            <small>Current</small>
-                            <small>Max</small>
-                        </div>
-                        <div class="temp-bar mb-3">
-                            <div class="temp-progress" id="tempProgress"></div>
-                        </div>
-                        <div class="temp-values d-flex justify-content-between">
-                            <h5 id="tempMin" class="text-info">--°C</h5>
-                            <h5 id="tempCurrent" class="fw-bold">--°C</h5>
-                            <h5 id="tempMax" class="text-danger">--°C</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hourly Forecast -->
-        <div class="hourly-forecast mb-4" id="forecast" data-aos="fade-up" data-aos-duration="700">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5><i class="bi bi-clock-history me-2"></i>24-Hour Forecast</h5>
-                <small class="text-light opacity-75">Every 3 hours</small>
-            </div>
-            <div class="hourly-scroll-container">
-                <div class="hourly-scroll" id="hourlyForecast">
-                    <!-- Hourly items will be added here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- 5-Day Forecast -->
-        <div class="forecast-card rounded-4 p-4 mb-5" data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
-            <h5 class="mb-4"><i class="bi bi-calendar3 me-2"></i>5-Day Forecast</h5>
-            <div id="forecastDays">
-                <!-- Forecast days will be added here -->
-            </div>
-        </div>
-
-        <!-- Weather Maps Section -->
-        <div class="maps-section mb-5" id="maps" data-aos="fade-up" data-aos-duration="800">
-            <div class="section-header mb-4">
-                <h5><i class="bi bi-map me-2"></i>Weather Maps</h5>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="map-card rounded-3 p-4 h-100" data-aos="zoom-in" data-aos-duration="600">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-thermometer-half text-danger me-3 fs-4"></i>
-                            <h5 class="mb-0">Temperature Map</h5>
-                        </div>
-                        <div class="map-placeholder rounded-3">
-                            <div class="map-overlay text-center p-5">
-                                <i class="bi bi-thermometer-sun text-warning fs-1 mb-3"></i>
-                                <p>Temperature visualization map</p>
-                                <small class="text-light opacity-75">Interactive temperature map will load here</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="map-card rounded-3 p-4 h-100" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="600">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-cloud-rain text-info me-3 fs-4"></i>
-                            <h5 class="mb-0">Precipitation Map</h5>
-                        </div>
-                        <div class="map-placeholder rounded-3">
-                            <div class="map-overlay text-center p-5">
-                                <i class="bi bi-cloud-rain-heavy text-info fs-1 mb-3"></i>
-                                <p>Precipitation radar map</p>
-                                <small class="text-light opacity-75">Interactive precipitation map will load here</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Alerts Section -->
-        <div class="alerts-section mb-5" id="alerts" data-aos="fade-up" data-aos-duration="700">
-            <div class="section-header mb-4">
-                <h5><i class="bi bi-bell me-2"></i>Weather Alerts</h5>
-            </div>
-            <div class="alerts-container" id="weatherAlerts">
-                <!-- Alerts will be added here -->
-            </div>
-        </div>
-
-        <!-- Developer Section -->
-        <div class="developer-section mb-5" id="developer" data-aos="fade-up" data-aos-duration="800">
-            <div class="section-header mb-4">
-                <h5><i class="bi bi-code-slash me-2"></i>Meet the Developer</h5>
+      <!-- Weather Details Cards -->
+      <div class="row mb-4">
+        <!-- Sunrise/Sunset -->
+        <div
+          class="col-md-6 mb-4"
+          data-aos="fade-right"
+          data-aos-delay="200"
+          data-aos-duration="600"
+        >
+          <div class="detail-card rounded-3 p-4 h-100">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-sun text-warning me-3 fs-4"></i>
+              <h5 class="mb-0">Sun & Moon</h5>
             </div>
             <div class="row">
-                <div class="col-md-8">
-                    <div class="developer-profile" data-aos="fade-right" data-aos-duration="600">
-                        <div class="profile-header mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="developer-avatar me-3">
-                                    <i class="bi bi-person-circle text-warning fs-1"></i>
-                                </div>
-                                <div>
-                                    <h3 class="fw-bold mb-1">Tanzeel Ahmed</h3>
-                                    <p class="text-light opacity-75 mb-2">
-                                        Full Stack Developer & Weather Enthusiast
-                                    </p>
-                                    <div class="developer-tags">
-                                        <span class="tag">Web Development</span>
-                                        <span class="tag">UI/UX Design</span>
-                                        <span class="tag">Weather APIs</span>
-                                        <span class="tag">JavaScript Expert</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="profile-bio mb-4">
-                            <p>
-                                Hello! I'm Tanzeel Ahmed, a passionate full-stack developer who loves creating beautiful and functional web applications. This weather app is one of my projects that combines my interest in meteorology with my web development skills.
-                            </p>
-                            <p>
-                                I believe in creating applications that are not only functional but also provide an exceptional user experience. This weather app is built with modern web technologies and is designed to be fast, responsive, and user-friendly.
-                            </p>
-                        </div>
-
-                        <div class="skills-section mb-4">
-                            <h6 class="mb-3">🛠️ Technologies Used:</h6>
-                            <div class="skills-grid">
-                                <div class="skill-item" data-tooltip="HTML5">
-                                    <i class="bi bi-filetype-html text-danger"></i>
-                                </div>
-                                <div class="skill-item" data-tooltip="CSS3">
-                                    <i class="bi bi-filetype-css text-primary"></i>
-                                </div>
-                                <div class="skill-item" data-tooltip="JavaScript">
-                                    <i class="bi bi-filetype-js text-warning"></i>
-                                </div>
-                                <div class="skill-item" data-tooltip="Bootstrap 5">
-                                    <i class="bi bi-bootstrap text-purple"></i>
-                                </div>
-                                <div class="skill-item" data-tooltip="OpenWeather API">
-                                    <i class="bi bi-cloud-arrow-up text-info"></i>
-                                </div>
-                                <div class="skill-item" data-tooltip="GitHub">
-                                    <i class="bi bi-github"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              <div class="col-6">
+                <div class="sun-item text-center p-3 rounded-3">
+                  <i class="bi bi-sunrise text-warning fs-3 mb-2"></i>
+                  <p class="mb-1">Sunrise</p>
+                  <h5 class="fw-bold" id="sunrise">--:--</h5>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="developer-contact" data-aos="fade-left" data-aos-duration="600">
-                        <div class="contact-card rounded-3 p-4 h-100">
-                            <div class="text-center mb-4">
-                                <div class="contact-icon mb-3">
-                                    <i class="bi bi-envelope-at-fill text-warning fs-1"></i>
-                                </div>
-                                <h5 class="fw-bold mb-2">Contact & Connect</h5>
-                                <p class="text-light opacity-75">
-                                    Let's build something amazing together!
-                                </p>
-                            </div>
-
-                            <div class="contact-info mb-4">
-                                <div class="contact-item mb-3">
-                                    <i class="bi bi-envelope text-warning"></i>
-                                    <div>
-                                        <small>Email</small>
-                                        <p class="mb-0">tanzeel.ahmed.se@gmail.com</p>
-                                    </div>
-                                </div>
-                                <div class="contact-item mb-3">
-                                    <i class="bi bi-github"></i>
-                                    <div>
-                                        <small>GitHub</small>
-                                        <p class="mb-0">@Tanzeel804</p>
-                                    </div>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="bi bi-linkedin text-primary"></i>
-                                    <div>
-                                        <small>LinkedIn</small>
-                                        <p class="mb-0">Tanzeel Ahmed</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="social-links-grid text-center">
-                                <h6 class="mb-3">Follow Me</h6>
-                                <div class="row g-2">
-                                    <div class="col-6">
-                                        <a href="https://twitter.com/TanzeelOnX" target="_blank" class="social-btn twitter" title="Twitter/X">
-                                            <i class="bi bi-twitter-x"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/" target="_blank" class="social-btn linkedin" title="LinkedIn">
-                                            <i class="bi bi-linkedin"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="https://www.tiktok.com/@therealtanzeel" target="_blank" class="social-btn tiktok" title="TikTok">
-                                            <i class="bi bi-tiktok"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="https://www.instagram.com/tanzeelahmedpov" target="_blank" class="social-btn instagram" title="Instagram">
-                                            <i class="bi bi-instagram"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="https://www.facebook.com/tanzeelahmedpov" target="_blank" class="social-btn facebook" title="Facebook">
-                                            <i class="bi bi-facebook"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="https://github.com/Tanzeel804" target="_blank" class="social-btn github" title="GitHub">
-                                            <i class="bi bi-github"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-4 text-center">
-                                <a href="https://github.com/Tanzeel804?tab=repositories" target="_blank" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-box-arrow-up-right me-1"></i> View All Projects
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="col-6">
+                <div class="sun-item text-center p-3 rounded-3">
+                  <i class="bi bi-sunset text-warning fs-3 mb-2"></i>
+                  <p class="mb-1">Sunset</p>
+                  <h5 class="fw-bold" id="sunset">--:--</h5>
                 </div>
+              </div>
             </div>
+            <div class="mt-3 text-center">
+              <p class="mb-1">
+                Day Length: <span id="dayLength" class="fw-bold">--h --m</span>
+              </p>
+            </div>
+          </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="footer py-5" data-aos="fade-up" data-aos-duration="800">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div class="footer-brand" data-aos="fade-right" data-aos-delay="100">
-                            <i class="bi bi-cloud-sun-fill footer-icon me-2"></i>
-                            <h4>Weather<span class="text-warning">Pro</span></h4>
-                            <p class="footer-text">
-                                Professional weather forecasting powered by advanced technology and real-time data analytics.
-                            </p>
-                            <div class="footer-stats mt-3">
-                                <div class="stat-item">
-                                    <i class="bi bi-lightning-charge-fill text-warning"></i>
-                                    <span>Real-time Updates</span>
-                                </div>
-                                <div class="stat-item">
-                                    <i class="bi bi-shield-check text-success"></i>
-                                    <span>Accurate Forecasts</span>
-                                </div>
-                                <div class="stat-item">
-                                    <i class="bi bi-phone text-info"></i>
-                                    <span>Mobile Optimized</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-6 mb-4 mb-lg-0">
-                        <h5 class="footer-heading" data-aos="fade-up" data-aos-delay="150">Quick Links</h5>
-                        <ul class="footer-links">
-                            <li>
-                                <a href="#home" class="footer-link">
-                                    <i class="bi bi-arrow-right-circle"></i>
-                                    <span>Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#forecast" class="footer-link">
-                                    <i class="bi bi-arrow-right-circle"></i>
-                                    <span>Forecast</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#maps" class="footer-link">
-                                    <i class="bi bi-arrow-right-circle"></i>
-                                    <span>Maps</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#alerts" class="footer-link">
-                                    <i class="bi bi-arrow-right-circle"></i>
-                                    <span>Alerts</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#developer" class="footer-link">
-                                    <i class="bi bi-arrow-right-circle"></i>
-                                    <span>Developer</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-6 mb-4 mb-lg-0">
-                        <h5 class="footer-heading" data-aos="fade-up" data-aos-delay="200">Resources</h5>
-                        <ul class="footer-links">
-                            <li>
-                                <a href="https://openweathermap.org/api" target="_blank" class="footer-link">
-                                    <i class="bi bi-box-arrow-up-right"></i>
-                                    <span>API Docs</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link">
-                                    <i class="bi bi-file-text"></i>
-                                    <span>Documentation</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>FAQ</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link">
-                                    <i class="bi bi-shield-check"></i>
-                                    <span>Privacy Policy</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                    <span>Terms of Service</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="newsletter-card" data-aos="fade-left" data-aos-delay="250">
-                            <h5 class="footer-heading">📩 Stay Updated</h5>
-                            <p class="footer-text">
-                                Subscribe to get weather alerts, updates, and development insights directly to your inbox.
-                            </p>
-                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" placeholder="Enter your email" />
-                                <button class="btn btn-warning" type="button">
-                                    <i class="bi bi-send-check me-1"></i> Subscribe
-                                </button>
-                            </div>
-                            <div class="newsletter-features">
-                                <small><i class="bi bi-check-circle-fill text-success me-1"></i> No spam, ever</small>
-                                <small><i class="bi bi-check-circle-fill text-success me-1"></i> Unsubscribe anytime</small>
-                                <small><i class="bi bi-check-circle-fill text-success me-1"></i> Privacy protected</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer-divider my-4"></div>
-
-                <!-- Social Media Row -->
-                <div class="row align-items-center mb-4">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <h6 class="mb-3">Connect with me on social media:</h6>
-                        <div class="social-media-links">
-                            <a href="https://github.com/Tanzeel804" target="_blank" class="social-media-btn github" title="GitHub">
-                                <i class="bi bi-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/" target="_blank" class="social-media-btn linkedin" title="LinkedIn">
-                                <i class="bi bi-linkedin"></i>
-                            </a>
-                            <a href="https://twitter.com/TanzeelOnX" target="_blank" class="social-media-btn twitter" title="Twitter/X">
-                                <i class="bi bi-twitter-x"></i>
-                            </a>
-                            <a href="https://www.tiktok.com/@therealtanzeel" target="_blank" class="social-media-btn tiktok" title="TikTok">
-                                <i class="bi bi-tiktok"></i>
-                            </a>
-                            <a href="https://www.instagram.com/tanzeelahmedpov" target="_blank" class="social-media-btn instagram" title="Instagram">
-                                <i class="bi bi-instagram"></i>
-                            </a>
-                            <a href="https://www.facebook.com/tanzeelahmedpov" target="_blank" class="social-media-btn facebook" title="Facebook">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <div class="app-badges">
-                            <span class="badge bg-warning text-dark me-2 mb-2">
-                                <i class="bi bi-shield-check me-1"></i> Secure
-                            </span>
-                            <span class="badge bg-info me-2 mb-2">
-                                <i class="bi bi-phone me-1"></i> Responsive
-                            </span>
-                            <span class="badge bg-success me-2 mb-2">
-                                <i class="bi bi-lightning me-1"></i> Fast
-                            </span>
-                            <span class="badge bg-purple mb-2">
-                                <i class="bi bi-code-slash me-1"></i> Open Source
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Copyright Row -->
-                <div class="footer-bottom mt-4 pt-4">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <div class="powered-by" data-aos="fade-right">
-                                <p class="mb-0">
-                                    <i class="bi bi-cloud-lightning-rain-fill text-warning me-2"></i>
-                                    Powered by
-                                    <a href="https://openweathermap.org" target="_blank" class="text-warning fw-bold">OpenWeatherMap API</a>
-                                </p>
-                                <small class="text-light opacity-75">Weather data updates every 10 minutes</small>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-md-end">
-                            <div class="copyright" data-aos="fade-left">
-                                <p class="mb-2">
-                                    © 2024
-                                    <span class="text-warning fw-bold">Weather Pro</span>. All rights reserved.
-                                </p>
-                                <p class="mb-0">
-                                    Crafted with <i class="bi bi-heart-fill text-danger"></i> by
-                                    <a href="#developer" class="text-warning fw-bold">Tanzeel Ahmed</a>
-                                </p>
-                                <small class="text-light opacity-75">
-                                    Version 3.1.0 • Last updated:
-                                    <span id="lastUpdated">Today</span>
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Temperature Range -->
+        <div
+          class="col-md-6 mb-4"
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-duration="600"
+        >
+          <div class="detail-card rounded-3 p-4 h-100">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-thermometer-half text-danger me-3 fs-4"></i>
+              <h5 class="mb-0">Temperature Range</h5>
             </div>
-        </footer>
+            <div class="temp-range-chart">
+              <div class="temp-labels d-flex justify-content-between mb-2">
+                <small>Min</small>
+                <small>Current</small>
+                <small>Max</small>
+              </div>
+              <div class="temp-bar mb-3">
+                <div class="temp-progress" id="tempProgress"></div>
+              </div>
+              <div class="temp-values d-flex justify-content-between">
+                <h5 id="tempMin" class="text-info">--°C</h5>
+                <h5 id="tempCurrent" class="fw-bold">--°C</h5>
+                <h5 id="tempMax" class="text-danger">--°C</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hourly Forecast -->
+      <div
+        class="hourly-forecast mb-4"
+        id="forecast"
+        data-aos="fade-up"
+        data-aos-duration="700"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5><i class="bi bi-clock-history me-2"></i>24-Hour Forecast</h5>
+          <small class="text-light opacity-75">Every 3 hours</small>
+        </div>
+        <div class="hourly-scroll-container">
+          <div class="hourly-scroll" id="hourlyForecast">
+            <!-- Hourly items will be added here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 5-Day Forecast -->
+      <div
+        class="forecast-card rounded-4 p-4 mb-5"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-aos-duration="700"
+      >
+        <h5 class="mb-4"><i class="bi bi-calendar3 me-2"></i>5-Day Forecast</h5>
+        <div id="forecastDays">
+          <!-- Forecast days will be added here -->
+        </div>
+      </div>
+
+      <!-- Weather Maps Section -->
+      <div
+        class="maps-section mb-5"
+        id="maps"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <div class="section-header mb-4">
+          <h5><i class="bi bi-map me-2"></i>Weather Maps</h5>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div
+              class="map-card rounded-3 p-4 h-100"
+              data-aos="zoom-in"
+              data-aos-duration="600"
+            >
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-thermometer-half text-danger me-3 fs-4"></i>
+                <h5 class="mb-0">Temperature Map</h5>
+              </div>
+              <div class="map-placeholder rounded-3">
+                <div class="map-overlay text-center p-5">
+                  <i class="bi bi-thermometer-sun text-warning fs-1 mb-3"></i>
+                  <p>Temperature visualization map</p>
+                  <small class="text-light opacity-75"
+                    >Interactive temperature map will load here</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="map-card rounded-3 p-4 h-100"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+              data-aos-duration="600"
+            >
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-cloud-rain text-info me-3 fs-4"></i>
+                <h5 class="mb-0">Precipitation Map</h5>
+              </div>
+              <div class="map-placeholder rounded-3">
+                <div class="map-overlay text-center p-5">
+                  <i class="bi bi-cloud-rain-heavy text-info fs-1 mb-3"></i>
+                  <p>Precipitation radar map</p>
+                  <small class="text-light opacity-75"
+                    >Interactive precipitation map will load here</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerts Section -->
+      <div
+        class="alerts-section mb-5"
+        id="alerts"
+        data-aos="fade-up"
+        data-aos-duration="700"
+      >
+        <div class="section-header mb-4">
+          <h5><i class="bi bi-bell me-2"></i>Weather Alerts</h5>
+        </div>
+        <div class="alerts-container" id="weatherAlerts">
+          <!-- Alerts will be added here -->
+        </div>
+      </div>
+
+      <!-- Developer Section -->
+      <div
+        class="developer-section mb-5"
+        id="developer"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <div class="section-header mb-4">
+          <h5><i class="bi bi-code-slash me-2"></i>Meet the Developer</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div
+              class="developer-profile"
+              data-aos="fade-right"
+              data-aos-duration="600"
+            >
+              <div class="profile-header mb-4">
+                <div class="d-flex align-items-center">
+                  <div class="developer-avatar me-3">
+                    <!-- یہاں آپکی تصویر لگے گی -->
+                    <img
+                      src="./WhatsApp Image 2025-11-15 at 4.20.26 PM.jpeg"
+                      alt="Tanzeel Ahmed"
+                      class="profile-picture"
+                      onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Tanzeel+Ahmed&background=random&color=fff&size=150';"
+                    />
+                  </div>
+                  <div>
+                    <h3 class="fw-bold mb-1">Tanzeel Ahmed</h3>
+                    <p class="text-light opacity-75 mb-2">
+                      <i class="bi bi-award-fill text-warning me-1"></i> Full
+                      Stack Developer & Weather Enthusiast
+                    </p>
+                    <div class="developer-tags">
+                      <span class="tag">
+                        <i class="bi bi-code-slash me-1"></i> Web Development
+                      </span>
+                      <span class="tag">
+                        <i class="bi bi-palette me-1"></i> UI/UX Design
+                      </span>
+                      <span class="tag">
+                        <i class="bi bi-cloud-sun me-1"></i> Weather APIs
+                      </span>
+                      <span class="tag">
+                        <i class="bi bi-filetype-js me-1"></i> JavaScript Expert
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="profile-bio mb-4">
+                <div class="bio-card p-4 rounded-3">
+                  <h6 class="fw-bold mb-3">
+                    <i class="bi bi-person-badge me-2"></i>About Me
+                  </h6>
+                  <p class="mb-3">
+                    <i class="bi bi-chat-left-quote text-warning me-2"></i>
+                    Hello! I'm
+                    <span class="text-warning fw-bold">Tanzeel Ahmed</span>, a
+                    passionate full-stack developer who loves creating beautiful
+                    and functional web applications. This weather app is one of
+                    my projects that combines my interest in meteorology with my
+                    web development skills.
+                  </p>
+                  <p class="mb-0">
+                    <i class="bi bi-lightbulb text-warning me-2"></i>
+                    I believe in creating applications that are not only
+                    functional but also provide an exceptional user experience.
+                    This weather app is built with modern web technologies and
+                    is designed to be fast, responsive, and user-friendly.
+                  </p>
+                </div>
+              </div>
+
+              <div class="skills-section mb-4">
+                <div class="skills-card p-4 rounded-3">
+                  <h6 class="fw-bold mb-3">
+                    <i class="bi bi-tools me-2"></i>Technologies Used in This
+                    Project
+                  </h6>
+                  <div class="skills-grid">
+                    <div class="skill-item" data-tooltip="HTML5">
+                      <i class="bi bi-filetype-html text-danger fs-3"></i>
+                      <span class="skill-name">HTML5</span>
+                    </div>
+                    <div class="skill-item" data-tooltip="CSS3">
+                      <i class="bi bi-filetype-css text-primary fs-3"></i>
+                      <span class="skill-name">CSS3</span>
+                    </div>
+                    <div class="skill-item" data-tooltip="JavaScript">
+                      <i class="bi bi-filetype-js text-warning fs-3"></i>
+                      <span class="skill-name">JavaScript</span>
+                    </div>
+                    <div class="skill-item" data-tooltip="Bootstrap 5">
+                      <i class="bi bi-bootstrap text-purple fs-3"></i>
+                      <span class="skill-name">Bootstrap 5</span>
+                    </div>
+                    <div class="skill-item" data-tooltip="OpenWeather API">
+                      <i class="bi bi-cloud-arrow-up text-info fs-3"></i>
+                      <span class="skill-name">Weather API</span>
+                    </div>
+                    <div class="skill-item" data-tooltip="GitHub">
+                      <i class="bi bi-github fs-3"></i>
+                      <span class="skill-name">GitHub</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div
+              class="developer-contact"
+              data-aos="fade-left"
+              data-aos-duration="600"
+            >
+              <div class="contact-card rounded-3 p-4 h-100">
+                <div class="text-center mb-4">
+                  <div class="contact-icon mb-3">
+                    <i class="bi bi-envelope-at-fill text-warning fs-1"></i>
+                  </div>
+                  <h5 class="fw-bold mb-2">Contact & Connect</h5>
+                  <p class="text-light opacity-75">
+                    Let's build something amazing together!
+                  </p>
+                </div>
+
+                <div class="contact-info mb-4">
+                  <a
+                    href="mailto:tanzeel.ahmed.se@gmail.com"
+                    class="contact-item mb-3 text-decoration-none"
+                  >
+                    <i class="bi bi-envelope text-warning"></i>
+                    <div>
+                      <small class="text-light opacity-75">Email</small>
+                      <p class="mb-0 text-light fw-medium">
+                        tanzeel.ahmed.se@gmail.com
+                      </p>
+                    </div>
+                    <i class="bi bi-arrow-right text-light opacity-75"></i>
+                  </a>
+
+                  <a
+                    href="https://github.com/Tanzeel804"
+                    target="_blank"
+                    class="contact-item mb-3 text-decoration-none"
+                  >
+                    <i class="bi bi-github"></i>
+                    <div>
+                      <small class="text-light opacity-75">GitHub</small>
+                      <p class="mb-0 text-light fw-medium">@Tanzeel804</p>
+                    </div>
+                    <i
+                      class="bi bi-box-arrow-up-right text-light opacity-75"
+                    ></i>
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/"
+                    target="_blank"
+                    class="contact-item text-decoration-none"
+                  >
+                    <i class="bi bi-linkedin text-primary"></i>
+                    <div>
+                      <small class="text-light opacity-75">LinkedIn</small>
+                      <p class="mb-0 text-light fw-medium">Tanzeel Ahmed</p>
+                    </div>
+                    <i
+                      class="bi bi-box-arrow-up-right text-light opacity-75"
+                    ></i>
+                  </a>
+                </div>
+
+                <div class="social-links-grid text-center">
+                  <h6 class="mb-3">
+                    <i class="bi bi-share me-2"></i>Follow Me
+                  </h6>
+                  <div class="row g-2">
+                    <div class="col-4">
+                      <a
+                        href="https://twitter.com/TanzeelOnX"
+                        target="_blank"
+                        class="social-btn twitter"
+                        title="Twitter/X"
+                      >
+                        <i class="bi bi-twitter-x fs-5"></i>
+                      </a>
+                    </div>
+                    <div class="col-4">
+                      <a
+                        href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/"
+                        target="_blank"
+                        class="social-btn linkedin"
+                        title="LinkedIn"
+                      >
+                        <i class="bi bi-linkedin fs-5"></i>
+                      </a>
+                    </div>
+                    <div class="col-4">
+                      <a
+                        href="https://www.tiktok.com/@therealtanzeel"
+                        target="_blank"
+                        class="social-btn tiktok"
+                        title="TikTok"
+                      >
+                        <i class="bi bi-tiktok fs-5"></i>
+                      </a>
+                    </div>
+                    <div class="col-4">
+                      <a
+                        href="https://www.instagram.com/tanzeelahmedpov"
+                        target="_blank"
+                        class="social-btn instagram"
+                        title="Instagram"
+                      >
+                        <i class="bi bi-instagram fs-5"></i>
+                      </a>
+                    </div>
+                    <div class="col-4">
+                      <a
+                        href="https://www.facebook.com/tanzeelahmedpov"
+                        target="_blank"
+                        class="social-btn facebook"
+                        title="Facebook"
+                      >
+                        <i class="bi bi-facebook fs-5"></i>
+                      </a>
+                    </div>
+                    <div class="col-4">
+                      <a
+                        href="https://github.com/Tanzeel804"
+                        target="_blank"
+                        class="social-btn github"
+                        title="GitHub"
+                      >
+                        <i class="bi bi-github fs-5"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                  <a
+                    href="https://github.com/Tanzeel804?tab=repositories"
+                    target="_blank"
+                    class="btn btn-warning btn-sm w-100"
+                  >
+                    <i class="bi bi-box-arrow-up-right me-1"></i> View All
+                    Projects
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="footer py-5" data-aos="fade-up" data-aos-duration="800">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div
+                class="footer-brand"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
+                <i class="bi bi-cloud-sun-fill footer-icon me-2"></i>
+                <h4>Weather<span class="text-warning">Pro</span></h4>
+                <p class="footer-text">
+                  Professional weather forecasting powered by advanced
+                  technology and real-time data analytics.
+                </p>
+                <div class="footer-stats mt-3">
+                  <div class="stat-item">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i>
+                    <span>Real-time Updates</span>
+                  </div>
+                  <div class="stat-item">
+                    <i class="bi bi-shield-check text-success"></i>
+                    <span>Accurate Forecasts</span>
+                  </div>
+                  <div class="stat-item">
+                    <i class="bi bi-phone text-info"></i>
+                    <span>Mobile Optimized</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+              <h5
+                class="footer-heading"
+                data-aos="fade-up"
+                data-aos-delay="150"
+              >
+                Quick Links
+              </h5>
+              <ul class="footer-links">
+                <li>
+                  <a href="#home" class="footer-link">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <span>Home</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#forecast" class="footer-link">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <span>Forecast</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#maps" class="footer-link">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <span>Maps</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#alerts" class="footer-link">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <span>Alerts</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#developer" class="footer-link">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <span>Developer</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+              <h5
+                class="footer-heading"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                Resources
+              </h5>
+              <ul class="footer-links">
+                <li>
+                  <a
+                    href="https://openweathermap.org/api"
+                    target="_blank"
+                    class="footer-link"
+                  >
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    <span>API Docs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="footer-link">
+                    <i class="bi bi-file-text"></i>
+                    <span>Documentation</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="footer-link">
+                    <i class="bi bi-question-circle"></i>
+                    <span>FAQ</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="footer-link">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Privacy Policy</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="footer-link">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>Terms of Service</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-4">
+              <div
+                class="newsletter-card"
+                data-aos="fade-left"
+                data-aos-delay="250"
+              >
+                <h5 class="footer-heading">📩 Stay Updated</h5>
+                <p class="footer-text">
+                  Subscribe to get weather alerts, updates, and development
+                  insights directly to your inbox.
+                </p>
+                <div class="input-group mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Enter your email"
+                  />
+                  <button class="btn btn-warning" type="button">
+                    <i class="bi bi-send-check me-1"></i> Subscribe
+                  </button>
+                </div>
+                <div class="newsletter-features">
+                  <small
+                    ><i class="bi bi-check-circle-fill text-success me-1"></i>
+                    No spam, ever</small
+                  >
+                  <small
+                    ><i class="bi bi-check-circle-fill text-success me-1"></i>
+                    Unsubscribe anytime</small
+                  >
+                  <small
+                    ><i class="bi bi-check-circle-fill text-success me-1"></i>
+                    Privacy protected</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-divider my-4"></div>
+
+          <!-- Social Media Row -->
+          <div class="row align-items-center mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <h6 class="mb-3">Connect with me on social media:</h6>
+              <div class="social-media-links">
+                <a
+                  href="https://github.com/Tanzeel804"
+                  target="_blank"
+                  class="social-media-btn github"
+                  title="GitHub"
+                >
+                  <i class="bi bi-github"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/tanzeel-ahmed-b21288397/"
+                  target="_blank"
+                  class="social-media-btn linkedin"
+                  title="LinkedIn"
+                >
+                  <i class="bi bi-linkedin"></i>
+                </a>
+                <a
+                  href="https://twitter.com/TanzeelOnX"
+                  target="_blank"
+                  class="social-media-btn twitter"
+                  title="Twitter/X"
+                >
+                  <i class="bi bi-twitter-x"></i>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@therealtanzeel"
+                  target="_blank"
+                  class="social-media-btn tiktok"
+                  title="TikTok"
+                >
+                  <i class="bi bi-tiktok"></i>
+                </a>
+                <a
+                  href="https://www.instagram.com/tanzeelahmedpov"
+                  target="_blank"
+                  class="social-media-btn instagram"
+                  title="Instagram"
+                >
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a
+                  href="https://www.facebook.com/tanzeelahmedpov"
+                  target="_blank"
+                  class="social-media-btn facebook"
+                  title="Facebook"
+                >
+                  <i class="bi bi-facebook"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="app-badges">
+                <span class="badge bg-warning text-dark me-2 mb-2">
+                  <i class="bi bi-shield-check me-1"></i> Secure
+                </span>
+                <span class="badge bg-info me-2 mb-2">
+                  <i class="bi bi-phone me-1"></i> Responsive
+                </span>
+                <span class="badge bg-success me-2 mb-2">
+                  <i class="bi bi-lightning me-1"></i> Fast
+                </span>
+                <span class="badge bg-purple mb-2">
+                  <i class="bi bi-code-slash me-1"></i> Open Source
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copyright Row -->
+          <div class="footer-bottom mt-4 pt-4">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="powered-by" data-aos="fade-right">
+                  <p class="mb-0">
+                    <i
+                      class="bi bi-cloud-lightning-rain-fill text-warning me-2"
+                    ></i>
+                    Powered by
+                    <a
+                      href="https://openweathermap.org"
+                      target="_blank"
+                      class="text-warning fw-bold"
+                      >OpenWeatherMap API</a
+                    >
+                  </p>
+                  <small class="text-light opacity-75"
+                    >Weather data updates every 10 minutes</small
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 text-md-end">
+                <div class="copyright" data-aos="fade-left">
+                  <p class="mb-2">
+                    © 2024
+                    <span class="text-warning fw-bold">Weather Pro</span>. All
+                    rights reserved.
+                  </p>
+                  <p class="mb-0">
+                    Crafted with <i class="bi bi-heart-fill text-danger"></i> by
+                    <a href="#developer" class="text-warning fw-bold"
+                      >Tanzeel Ahmed</a
+                    >
+                  </p>
+                  <small class="text-light opacity-75">
+                    Version 3.1.0 • Last updated:
+                    <span id="lastUpdated">Today</span>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="btn btn-warning back-to-top">
-        <i class="bi bi-arrow-up"></i>
+      <i class="bi bi-arrow-up"></i>
     </button>
 
     <!-- Bootstrap JS -->
@@ -732,5 +1056,5 @@
 
     <!-- Custom JS -->
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
