@@ -67,7 +67,7 @@ const state = {
   isMobile: window.innerWidth <= 768,
 };
 
-// Developer Info (Your Links)
+// Developer Info
 const developerInfo = {
   name: "Tanzeel Ahmed",
   email: "tanzeel.ahmed.se@gmail.com",
@@ -163,6 +163,8 @@ function setupEventListeners() {
   document.addEventListener("click", (e) => {
     if (
       state.isMobile &&
+      elements.mobileSearchBar &&
+      elements.mobileSearchToggle &&
       !elements.mobileSearchBar.contains(e.target) &&
       !elements.mobileSearchToggle.contains(e.target) &&
       elements.mobileSearchBar.classList.contains("active")
@@ -174,7 +176,7 @@ function setupEventListeners() {
   // Quick city buttons
   document.querySelectorAll("[data-city]").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const city = e.target.getAttribute("data-city");
+      const city = e.target.closest("button").getAttribute("data-city");
       if (state.isMobile) {
         elements.mobileSearchField.value = city;
         loadWeather(city);
@@ -190,9 +192,10 @@ function setupEventListeners() {
   elements.themeToggle?.addEventListener("click", toggleTheme);
 
   // Error dismiss
-  document
-    .querySelector('[data-bs-dismiss="alert"]')
-    ?.addEventListener("click", hideError);
+  const errorDismissBtn = document.querySelector('[data-bs-dismiss="alert"]');
+  if (errorDismissBtn) {
+    errorDismissBtn.addEventListener("click", hideError);
+  }
 
   // Window resize
   window.addEventListener("resize", () => {
@@ -200,31 +203,35 @@ function setupEventListeners() {
     AOS.refresh();
   });
 
-  // Add social media link handlers
-  setupSocialLinks();
-}
-
-// Setup social media links
-function setupSocialLinks() {
-  // Update all social links with actual URLs
-  document.querySelectorAll('a[href*="twitter.com"]').forEach((link) => {
-    link.href = developerInfo.twitter;
-  });
-
-  document.querySelectorAll('a[href*="linkedin.com"]').forEach((link) => {
-    link.href = developerInfo.linkedin;
-  });
-
-  document.querySelectorAll('a[href*="github.com"]').forEach((link) => {
-    if (link.href.includes("Tanzeel804")) {
-      link.href = developerInfo.github;
+  // Add keyboard shortcuts
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === "k") {
+      e.preventDefault();
+      if (state.isMobile) {
+        toggleMobileSearch();
+      } else {
+        elements.searchField.focus();
+      }
     }
   });
 
-  // Add email links
-  document.querySelectorAll('a[href*="mailto"]').forEach((link) => {
-    link.href = `mailto:${developerInfo.email}`;
+  // Add tooltip functionality
+  document.querySelectorAll("[data-tooltip]").forEach((element) => {
+    element.addEventListener("mouseenter", handleTooltip);
+    element.addEventListener("mouseleave", hideTooltip);
   });
+}
+
+// Handle tooltip
+function handleTooltip(e) {
+  const tooltip = e.target.getAttribute("data-tooltip");
+  if (tooltip) {
+    // Tooltip is handled by CSS
+  }
+}
+
+function hideTooltip() {
+  // Tooltip is handled by CSS
 }
 
 // Handle desktop search
@@ -232,8 +239,10 @@ function handleSearch() {
   const city = elements.searchField.value.trim();
   if (city) {
     loadWeather(city);
+    elements.searchField.blur();
   } else {
     showError("Please enter a city name");
+    elements.searchField.focus();
   }
 }
 
@@ -245,6 +254,7 @@ function handleMobileSearch() {
     toggleMobileSearch();
   } else {
     showError("Please enter a city name");
+    elements.mobileSearchField.focus();
   }
 }
 
@@ -254,6 +264,9 @@ function toggleMobileSearch() {
 
   if (elements.mobileSearchBar.classList.contains("active")) {
     elements.mobileSearchField.focus();
+    elements.mobileSearchToggle.innerHTML = '<i class="bi bi-x-lg"></i>';
+  } else {
+    elements.mobileSearchToggle.innerHTML = '<i class="bi bi-search"></i>';
   }
 }
 
@@ -323,6 +336,10 @@ async function fetchWeather(city) {
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error("City not found. Please check the city name.");
+    } else if (response.status === 401) {
+      throw new Error("API key error. Please contact developer.");
+    } else if (response.status === 429) {
+      throw new Error("Too many requests. Please try again later.");
     }
     throw new Error("Unable to fetch weather data. Please try again.");
   }
@@ -332,7 +349,7 @@ async function fetchWeather(city) {
 
 // Fetch forecast
 async function fetchForecast(city) {
-  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=${state.unit}`;
+  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=${state.unit}&cnt=40`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -394,9 +411,22 @@ function updateCurrentWeather(data) {
   const tempPosition =
     tempRange > 0 ? ((temp - tempMin) / tempRange) * 100 : 50;
   elements.tempProgress.style.width = `${tempPosition}%`;
+  elements.tempProgress.style.background = `linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)`;
 
   // Update background based on weather
   updateWeatherBackground(data.weather[0].main);
+
+  // Add animation to temperature
+  animateTemperature(temp);
+}
+
+// Animate temperature change
+function animateTemperature(newTemp) {
+  elements.temperature.style.transition = "transform 0.5s ease";
+  elements.temperature.style.transform = "scale(1.1)";
+  setTimeout(() => {
+    elements.temperature.style.transform = "scale(1)";
+  }, 500);
 }
 
 // Update forecast display
@@ -409,7 +439,12 @@ function updateForecast(data) {
   const dailyForecasts = {};
   const now = new Date();
 
-  data.list.forEach((item) => {
+  // Filter to get 8 items per day (3-hour intervals)
+  const forecastItems = data.list
+    .filter((item, index) => index % 2 === 0)
+    .slice(0, 24);
+
+  forecastItems.forEach((item) => {
     const date = new Date(item.dt * 1000);
     const day = date.toLocaleDateString("en-US", { weekday: "short" });
 
@@ -424,13 +459,8 @@ function updateForecast(data) {
     dailyForecasts[day].temps.push(item.main.temp);
     dailyForecasts[day].weather.push(item.weather[0]);
 
-    // Add to hourly forecast for today and tomorrow
-    if (
-      date.getDate() === now.getDate() ||
-      date.getDate() === now.getDate() + 1
-    ) {
-      addHourlyForecastItem(date, item);
-    }
+    // Add to hourly forecast
+    addHourlyForecastItem(date, item);
   });
 
   // Update 5-day forecast
@@ -452,10 +482,10 @@ function addHourlyForecastItem(date, data) {
   const desc = data.weather[0].description;
 
   hourDiv.innerHTML = `
-        <div class="hour-time">${hour}:00</div>
-        <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" class="hour-icon">
-        <div class="hour-temp">${temp}°</div>
-        <div class="hour-desc">${desc}</div>
+        <div class="hour-time fw-bold">${hour}:00</div>
+        <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" class="hour-icon my-2" width="40">
+        <div class="hour-temp fw-bold">${temp}°</div>
+        <div class="hour-desc small text-light opacity-75">${desc}</div>
     `;
 
   // Add AOS animation
@@ -487,18 +517,17 @@ function addDailyForecastItem(day, data, isToday) {
   const mostCommonWeather = Object.keys(weatherCount).reduce((a, b) =>
     weatherCount[a] > weatherCount[b] ? a : b
   );
+  const weatherIcon = data.weather[0].icon;
 
   dayDiv.innerHTML = `
-        <div class="day-name">${isToday ? "Today" : day}</div>
-        <div class="forecast-temp">
-            <div class="weather-icon-small">
-                <img src="https://openweathermap.org/img/wn/${
-                  data.weather[0].icon
-                }.png" alt="${mostCommonWeather}" width="40">
+        <div class="day-name fw-bold">${isToday ? "Today" : day}</div>
+        <div class="forecast-temp d-flex align-items-center">
+            <div class="weather-icon-small me-3">
+                <img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="${mostCommonWeather}" width="40">
             </div>
             <div class="temp-range">
-                <span class="temp-high">${maxTemp}°</span>
-                <span class="temp-low">${minTemp}°</span>
+                <span class="temp-high fw-bold">${maxTemp}°</span>
+                <span class="temp-low text-light opacity-75 ms-2">${minTemp}°</span>
             </div>
         </div>
     `;
@@ -540,7 +569,7 @@ function getCurrentLocation() {
         } else {
           // Use coordinates directly
           const weatherData = await fetchWeatherByCoords(latitude, longitude);
-          state.weatherData = weatherData;
+          state.weatherData = { current: weatherData };
           updateCurrentWeather(weatherData);
 
           if (state.isMobile) {
@@ -568,6 +597,11 @@ function getCurrentLocation() {
         default:
           showError("Unable to get your location.");
       }
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0,
     }
   );
 }
@@ -576,11 +610,17 @@ function getCurrentLocation() {
 async function reverseGeocode(lat, lon) {
   try {
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`
     );
     const data = await response.json();
-    return data.address.city || data.address.town || data.address.village;
+    return (
+      data.address.city ||
+      data.address.town ||
+      data.address.village ||
+      data.address.municipality
+    );
   } catch (error) {
+    console.error("Reverse geocode error:", error);
     return null;
   }
 }
@@ -605,10 +645,12 @@ function toggleTheme() {
   updateThemeButton();
 
   // Add theme change animation
-  document.body.style.transition = "background 0.5s ease";
+  document.body.style.opacity = "0.8";
+  document.body.style.transition = "opacity 0.3s ease";
+
   setTimeout(() => {
-    document.body.style.transition = "";
-  }, 500);
+    document.body.style.opacity = "1";
+  }, 300);
 }
 
 // Update theme button icon
@@ -617,12 +659,12 @@ function updateThemeButton() {
   const moonIcon = elements.themeToggle.querySelector(".bi-moon-fill");
 
   if (state.theme === "dark") {
-    sunIcon.classList.add("d-none");
-    moonIcon.classList.remove("d-none");
-    elements.themeToggle.title = "Switch to Light Mode";
-  } else {
     sunIcon.classList.remove("d-none");
     moonIcon.classList.add("d-none");
+    elements.themeToggle.title = "Switch to Light Mode";
+  } else {
+    sunIcon.classList.add("d-none");
+    moonIcon.classList.remove("d-none");
     elements.themeToggle.title = "Switch to Dark Mode";
   }
 }
@@ -633,6 +675,7 @@ function updateTime() {
   elements.currentTime.textContent = now.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
     hour12: false,
   });
 }
@@ -644,7 +687,12 @@ function updateLastUpdated() {
     hour: "2-digit",
     minute: "2-digit",
   });
-  elements.lastUpdated.textContent = `${now.toLocaleDateString()} at ${timeString}`;
+  const dateString = now.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  elements.lastUpdated.textContent = `${dateString} at ${timeString}`;
 }
 
 // Update weather background
@@ -682,8 +730,17 @@ function updateWeatherBackground(weatherCondition) {
     case "mist":
     case "fog":
     case "haze":
+    case "smoke":
       body.classList.add("weather-bg-mist");
       break;
+    default:
+      // Default gradient based on time
+      const hour = new Date().getHours();
+      if (hour >= 6 && hour < 18) {
+        body.classList.add("weather-bg-clear");
+      } else {
+        body.classList.add("weather-bg-clouds");
+      }
   }
 }
 
@@ -703,15 +760,19 @@ function updateWeatherAnimation(weatherCondition) {
     case "rain":
     case "drizzle":
       animationDiv.classList.add("rain-animation");
+      animationDiv.innerHTML = `<div class="raindrop"></div><div class="raindrop"></div><div class="raindrop"></div>`;
       break;
     case "snow":
       animationDiv.classList.add("snow-animation");
+      animationDiv.innerHTML = `<div class="snowflake"></div><div class="snowflake"></div><div class="snowflake"></div>`;
       break;
     case "clear":
       animationDiv.classList.add("sun-animation");
+      animationDiv.innerHTML = `<div class="sun"></div>`;
       break;
     case "clouds":
       animationDiv.classList.add("cloud-animation");
+      animationDiv.innerHTML = `<div class="cloud"></div><div class="cloud"></div>`;
       break;
   }
 
@@ -789,24 +850,28 @@ function updateAlerts(weatherData) {
   if (alerts.length > 0) {
     alertsContainer.innerHTML = alerts
       .map(
-        (alert) => `
-            <div class="alert alert-${alert.type} d-flex align-items-center mb-3" role="alert" data-aos="fade-up">
-                <i class="${alert.icon} me-2"></i>
-                <div>
-                    <strong>${alert.title}</strong>
-                    <p class="mb-0">${alert.message}</p>
+        (alert, index) => `
+                <div class="alert alert-${
+                  alert.type
+                } d-flex align-items-center mb-3" role="alert" data-aos="fade-up" data-aos-delay="${
+          index * 100
+        }">
+                    <i class="${alert.icon} me-2 fs-5"></i>
+                    <div>
+                        <strong class="d-block mb-1">${alert.title}</strong>
+                        <p class="mb-0 small">${alert.message}</p>
+                    </div>
                 </div>
-            </div>
-        `
+            `
       )
       .join("");
   } else {
     alertsContainer.innerHTML = `
             <div class="alert alert-success d-flex align-items-center" role="alert" data-aos="fade-up">
-                <i class="bi bi-check-circle-fill me-2"></i>
+                <i class="bi bi-check-circle-fill me-2 fs-5"></i>
                 <div>
-                    <strong>✅ All Clear</strong>
-                    <p class="mb-0">No severe weather alerts for ${weatherData.name}.</p>
+                    <strong class="d-block mb-1">✅ All Clear</strong>
+                    <p class="mb-0 small">No severe weather alerts for ${weatherData.name}.</p>
                 </div>
             </div>
         `;
@@ -834,8 +899,13 @@ function setupSmoothScroll() {
           }
         }
 
+        // Close mobile search if open
+        if (elements.mobileSearchBar?.classList.contains("active")) {
+          toggleMobileSearch();
+        }
+
         window.scrollTo({
-          top: targetElement.offsetTop - 100,
+          top: targetElement.offsetTop - 80,
           behavior: "smooth",
         });
       }
@@ -882,30 +952,39 @@ function formatTime(date) {
 
 // Show loading spinner
 function showLoading() {
-  elements.loadingSpinner.classList.remove("d-none");
-  document.body.style.overflow = "hidden";
+  if (elements.loadingSpinner) {
+    elements.loadingSpinner.classList.remove("d-none");
+  }
+  document.body.style.cursor = "wait";
 }
 
 // Hide loading spinner
 function hideLoading() {
-  elements.loadingSpinner.classList.add("d-none");
-  document.body.style.overflow = "";
+  if (elements.loadingSpinner) {
+    elements.loadingSpinner.classList.add("d-none");
+  }
+  document.body.style.cursor = "default";
 }
 
 // Show error message
 function showError(message) {
-  elements.errorMessage.textContent = message;
-  elements.errorContainer.classList.remove("d-none");
+  if (elements.errorMessage && elements.errorContainer) {
+    elements.errorMessage.textContent = message;
+    elements.errorContainer.classList.remove("d-none");
+    elements.errorContainer.style.animation = "shake 0.5s ease";
 
-  // Auto hide error after 5 seconds
-  setTimeout(() => {
-    hideError();
-  }, 5000);
+    // Auto hide error after 5 seconds
+    setTimeout(() => {
+      hideError();
+    }, 5000);
+  }
 }
 
 // Hide error message
 function hideError() {
-  elements.errorContainer.classList.add("d-none");
+  if (elements.errorContainer) {
+    elements.errorContainer.classList.add("d-none");
+  }
 }
 
 // Load last searched city on page load
@@ -925,31 +1004,34 @@ window.addEventListener("DOMContentLoaded", () => {
 // Handle offline/online status
 window.addEventListener("offline", () => {
   showError("📡 You are offline. Please check your internet connection.");
+  if (state.weatherData) {
+    // Show cached data message
+    const cachedAlert = document.createElement("div");
+    cachedAlert.className = "alert alert-warning mt-3";
+    cachedAlert.innerHTML = `
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <strong>Showing cached data</strong>
+            <p class="mb-0 small">Connect to internet for latest updates.</p>
+        `;
+    document.querySelector(".container").prepend(cachedAlert);
+  }
 });
 
 window.addEventListener("online", () => {
   hideError();
+  // Remove cached data alert
+  const cachedAlert = document.querySelector(".alert-warning");
+  if (cachedAlert) {
+    cachedAlert.remove();
+  }
+
   if (state.currentCity) {
-    loadWeather(state.currentCity);
+    // Reload weather data
+    setTimeout(() => {
+      loadWeather(state.currentCity);
+    }, 1000);
   }
 });
-
-// Add touch feedback for mobile
-document.addEventListener("touchstart", function () {}, true);
-
-// Prevent zoom on double tap (mobile optimization)
-let lastTouchEnd = 0;
-document.addEventListener(
-  "touchend",
-  function (event) {
-    const now = new Date().getTime();
-    if (now - lastTouchEnd <= 300) {
-      event.preventDefault();
-    }
-    lastTouchEnd = now;
-  },
-  false
-);
 
 // Add page load animation
 window.addEventListener("load", () => {
@@ -963,4 +1045,60 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     document.body.style.transition = "";
   }, 600);
+
+  // Add loaded class for additional animations
+  document.body.classList.add("loaded");
+});
+
+// Prevent zoom on double tap (mobile optimization)
+let lastTouchEnd = 0;
+document.addEventListener(
+  "touchend",
+  function (event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  },
+  { passive: false }
+);
+
+// Add service worker for PWA capabilities
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        console.log("SW registered: ", registration);
+      })
+      .catch((registrationError) => {
+        console.log("SW registration failed: ", registrationError);
+      });
+  });
+}
+
+// Add install prompt for PWA
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Show install button if needed
+  setTimeout(() => {
+    if (deferredPrompt) {
+      showInstallPrompt();
+    }
+  }, 5000);
+});
+
+function showInstallPrompt() {
+  // You can add an install button here
+  console.log("PWA install available");
+}
+
+// Handle app installed
+window.addEventListener("appinstalled", () => {
+  deferredPrompt = null;
+  console.log("PWA installed");
 });
